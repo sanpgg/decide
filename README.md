@@ -2,12 +2,12 @@
 
 # Cargar Presupuesto 2020 
 prerequisitos:
-  - Archivo `junta_vecinal_2020.csv` que la gente del municipio proporcina una vez listo
-  - El archivo debe de estar en `db/junta_vecinal_2020.csv` 
-  - el elemento Budget con nombre `Presupuesto Participativo 2020` debe existir en la base de datos, se puede crear desde el admin de la aplicacion
+  - Archivo `junta_vecinal_2020.csv` que la gente del municipio proporciona una vez listo
+  - El archivo debe estar en `db/junta_vecinal_2020.csv` 
+  - El elemento Budget con nombre `Presupuesto Participativo 2020` debe existir en la base de datos, se puede crear desde el admin de la aplicacion
   - Una vez que se tenga los presupuestos para cada sector (K1..K6) actualizar el archivo `db/seeds/presupuesto_2020.seeds.rb` 
   - Correr el script en la consola `rake db:seed:single SEED=presupuesto_2020` 
- - Si todo corrió correctamente deberia verse algo similar a esto
+  - Si todo corrió correctamente debería verse algo similar a esto
 ![Resultado de Script](https://i.imgur.com/FqILoqg.png?1)
 
 
@@ -47,19 +47,23 @@ cd consul
 bundle install
 cp config/database.yml.example config/database.yml
 cp config/secrets.yml.example config/secrets.yml
+#Modificar el archivo config/database.yml con los datos de tu BD
 bin/rake db:create
 bin/rake db:migrate
 bin/rake db:dev_seed
 RAILS_ENV=test rake db:setup
 ```
 
-Run the app locally:
+Configurar las Api Keys, correos, dominios y demás propiedades en los archivos correspondientes:
+- Environments
+- Geocoder
+- Geokit
+- Paperclip
+- AWS
+- Correos
+- Etc.
 
-```bash
-bin/rails s
-```
-
-Run the app in production server:
+Correr la aplicación:
 
 ```bash
 bin/rails s -e production
