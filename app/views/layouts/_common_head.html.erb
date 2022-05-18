@@ -1,0 +1,18 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title><%= content_for?(:title) ? yield(:title) : default_title  %></title>
+
+<link rel="stylesheet" media="screen" href="/assets/application-cb48a5605803e529842491f40199b581997d67ef55c49e90f2328c00f0eb87fb.css">
+<script src="/assets/application-05eca8c43ab615e93c5e02de4ca589e942851038b5a7b36250429b96d7e0c121.js" data-turbolinks-track="true"></script>
+
+<%= stylesheet_link_tag "application" %>
+<%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+<%= favicon_link_tag "favicon.ico" %>
+<%= render "layouts/disable_animations_in_tests" if Rails.env.test? %>
+<style>
+body {
+  font-family: "Arial", sans-serif !important;
+}
+</style>

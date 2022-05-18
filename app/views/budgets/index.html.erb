@@ -1,0 +1,338 @@
+<style media="screen">
+  a div, a div span,
+  a { color: #060606 !important; }
+  .mt-5 {
+    margin-top: 4rem !important;
+  }
+  .mb-5{
+    margin-bottom: 4rem !important;
+  }
+.mt-4 {
+    margin-top: 3rem !important;
+  }
+  .mb-4{
+    margin-bottom: 3rem !important;
+  }
+  .button {
+    color: white !important;
+  }
+  .expanded.budget .button {
+	background: #A33D7C !important;
+	color: white !important;
+	border-radius: 10px;
+  }
+  .expanded.budget .button:hover{
+    color: white !important;
+  }
+  #new_map_location {
+    height: 320px;
+  }
+  .large-2 {
+    width: 14.66667%;
+    font-size: 1rem;
+  }
+  .bane {
+    line-height: 5rem;
+    width: 69%;
+    float: left;
+  }
+  .ideas {
+            padding: 10px;
+            display: inline-block;
+            position: relative;
+            width: auto;
+            height: auto;
+            background-color: #00CBD4;
+            border-radius: 15px 15px 0px 15px;
+            border: 1px solid black;
+
+   }
+   .ideas:after{
+             content: ' ';
+             position: absolute;
+             width: 0;
+             height: 0;
+             left: auto;
+             right: 0px;
+             bottom: -23px;
+             border: 12px solid;
+             border-color: #00CBD4 #00CBD4 transparent transparent;
+             z-index:2 ;
+           }
+           .ideas:before {
+                     bottom: -25px;
+                     content: ' ';
+                     position: absolute;
+                     transform: rotate(-91deg);
+                     right: -1px;
+                     width: 0;
+                     height: 0;
+                     left: auto;
+                     border: 12px solid;
+                     border-color: transparent black black transparent;
+                     z-index: 1;
+                   }
+  @media screen and (max-width:991px) {
+    .large-2 {
+        width: 33.33333%;
+      }
+  }
+  @media screen and (max-width:500px) {
+     .large-2 {
+          width: 100%;
+      }
+  }
+</style>
+
+<% if has_banners? %>
+  <%= render "shared/banner" %>
+<% end %>
+
+<% provide :title do %><%= t('budgets.index.title') %><% end %>
+
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: budgets_url %>
+<% end %>
+
+<% if current_budget.present? %>
+  <div id="budget_heading" class="expanded budget no-margin-top">
+    <div class="row" data-equalizer data-equalizer-on="medium">
+      <div class="small-12 medium-9 column padding" data-equalizer-watch>
+      <h2><%= current_budget.name %></h2>
+      <p class="bane" style="font-family: Arial, Sans-serif;margin: 0 auto;font-size: 4rem !important;"><b>Hagamos <span class="fs7" style="font-family:Times, serif;font-weight: lighter;">ciudad</span> con tus</b> <span class="ideas"><b>ideas</b></span></p>
+       <!-- current_budget.name -->
+        <div class="description"  style="height:19rem;">
+          <%= safe_html_with_links(current_budget.description) %>
+        </div>
+      </div>
+      <div class="small-12 medium-3 column info padding" data-equalizer-watch>
+        <p>
+          <strong><%= t("budgets.show.phase") %></strong>
+        </p>
+        <h2><%= t("budgets.phase.#{current_budget.phase}") %></h2>
+
+
+
+        <% if current_budget.accepting? %>
+          <% if current_user %>
+            <% if current_user.level_two_and_three_verified? %>
+            <%= link_to t("budgets.investments.index.sidebar.create"),
+            new_budget_investment_path(current_budget),
+            class: "button margin-top expanded mt-5 mb-5" %>
+
+            <% else %>
+            <div class="callout warning margin-top">
+              <%= t("budgets.investments.index.sidebar.verified_only",
+                    verify: link_to(t("budgets.investments.index.sidebar.verify_account"),
+                                    verification_path)).html_safe %>
+            </div>
+            <% end %>
+          <% else %>
+            <div class="callout primary margin-top">
+              <%= t("budgets.investments.index.sidebar.not_logged_in",
+                    sign_in: link_to(t("budgets.investments.index.sidebar.sign_in"),
+                                     new_user_session_path),
+                                     sign_up: link_to(t("budgets.investments.index.sidebar.sign_up"),
+                                                      new_user_registration_path)).html_safe %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if current_budget.finished? %>
+          <%= link_to t("budgets.show.see_results"),
+            budget_results_path(current_budget, heading_id: current_budget.headings.first),
+            class: "button margin-top expanded mt-5 mb-5" %>
+        <% end %>
+
+        <% if current_budget.balloting? %>
+          <%= link_to 'Decide tus propuestas favoritas aquí',
+            budget_ballot_path(current_budget),
+            class: "button margin-top expanded mt-4 mb-4" %>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="budget_info" class="budget-info margin">
+    <div class="row margin-top">
+      <div class="small-12 column">
+
+        <div id="groups_and_headings" class="groups-and-headings">
+          <h2><span style="font-size: 2rem;background: #00CBD4;color: white;font-size: 2rem;padding-left: 5px;padding-right: 5px;">1.</span> Estas son las fechas para participar:</h2>
+          <ul>
+            <li>Registro de propuestas del <b>1 de Abril al 1 de Mayo</b></li>
+            <li>Evaluación de factibilidad del <b>2 de Mayo al 1 de Julio</b></li>
+            <li>Etapa de decisiones del <b>8 al 17 de Julio</b></li>
+          </ul>
+          <h2><span style="font-size: 2rem;background: #00CBD4;color: white;font-size: 2rem;padding-left: 5px;padding-right: 5px;">2.</span> Conoce dónde participar:</h2>
+          <p>
+            Nuestro Municipio se divide en <b>6 sectores</b> de participación ciudadana.
+            <br>
+            Cada <b>sector</b> cuenta con aproximadamente 30 Juntas de Vecinos(as). <i><br><br>¿No sabes a cuál Junta perteneces? Aquí un mapa que te podría ayudar.</i>
+          </p>
+          <div class="container">
+           <iframe src="https://www.google.com/maps/d/embed?mid=1uMRf9-gT48bjpn0_4ZVS_9BN7gTaSIYq&ehbc=2E312F" width="100%" height="480"></iframe>
+          </div>
+          <br>
+          <h2><span style="font-size: 2rem;background: #00CBD4;color: white;font-size: 2rem;padding-left: 5px;padding-right: 5px;">3.</span> Sube tu propuesta:</h2>
+          <p>Puedes subir <b>dos propuestas</b>; una para tu sector y otra para tu junta</p>
+          <h2><i>Por sector</i></h2>
+          <p>
+            <em style="background: #00CBD4;">
+              Da <strong>click en el nombre</strong> del <b>sector</b> para participar.
+            </em>
+          </p>
+          <% @cards.each do |group| %>
+
+            <% sectors = group['extra'].select {|s| s["htype"] == "sector" } %>
+
+            <ul class="no-bullet wit" data-equalizer data-equalizer-on="medium">
+              <%= render partial: 'heading', collection: sectors, as: :heading %>
+            </ul>
+
+          <% end %>
+
+        </div>
+
+        <div id="groups_and_headings" class="groups-and-headings">
+          <h2><i>Por junta de vecino(as)</i></h2>
+          <p>
+            <em style="background: #00CBD4;">
+              Da <strong>click en el nombre</strong> de la <b>junta</b> para participar.
+            </em>
+          </p>
+
+          <% @cards.each do |group| %>
+
+            <% suburbs = group['extra'].select {|s| s["htype"] == "suburb" } %>
+
+            <% sector_headers = suburbs.map {|s| s["sector_header"]}.uniq %>
+
+            <% sector_headers.map do |header| %>
+
+              <% suburbs_from_sector = suburbs.select {|s| s["sector_header"] == header} %>
+
+              <h3><%= header %></h3>
+
+              <ul class="no-bullet" data-equalizer data-equalizer-on="medium">
+                <%= render partial: 'heading', collection: suburbs_from_sector, as: :heading %>
+              </ul>
+
+            <% end %>
+
+          <% end %>
+
+
+          <% unless current_budget.informing? %>
+          <% if Setting['feature.show_all_invesments'] %>
+            <div class="map">
+              <h2><%= t("budgets.index.map") %></h2>
+              <%= render_map(nil, "budgets", false, nil, @all_investments_map) %>
+            </div>
+          <% else %>
+            <div class="map">
+              <h2><%= t("budgets.index.map") %></h2>
+              <h4 class="<%= current_budget.id %>">Total de propuestas a la fecha: <a href="/presupuestos/<%=current_budget.id %>/investments?heading_id="><span style="background: #00CBD4;color: white;font-size: 2rem;padding-left: 5px;padding-right: 5px;"><%=@investment_counts %></span></a></h4>
+
+              <%= render_map(nil, "budgets", false, nil, @budgets_coordinates) %>
+            </div>
+          <% end %>
+
+
+
+            <div style="margin-top: 80px;">
+              <% show_links = show_links_to_budget_investments(current_budget) %>
+              <% if show_links %>
+                <div>
+                  <u>
+                    <%= link_to budget_investments_path(current_budget.id) do %>
+                      <%= t("budgets.index.investment_proyects") %>
+                    <% end %>
+                  </u>
+                </div>
+              <% end %>
+              <div>
+                <u>
+                  <%= link_to budget_investments_path(budget_id: current_budget.id, filter: 'unfeasible') do %>
+                    <%= t("budgets.index.unfeasible_investment_proyects") %>
+                  <% end %>
+                </u>
+              </div>
+            </div>
+          <% end %>
+
+          <div id="fases" class="margin-top margin-bottom">
+            <h2><%= t("budgets.index.all_phases") %></h2>
+            <%= render "phases", budget: current_budget %>
+          </div>
+        </div>
+
+      </div>
+
+      <% if @finished_budgets.present? %>
+        <div class="row margin-top">
+          <div class="small-12 medium-10 column margin-top">
+            <ul class="no-bullet submenu">
+              <li class="inline-block">
+                <%= link_to "#other_budgets", class: "is-active" do %>
+                  <h2>
+                    <%= t("budgets.index.finished_budgets") %>
+                  </h2>
+                <% end %>
+              </li>
+            </ul>
+
+            <div id="finished_budgets" class="budget-investments-list">
+              <% @finished_budgets.each do |budget| %>
+                <div class="budget-investment clear">
+                  <div class="panel past-budgets">
+                    <div class="row" data-equalizer data-equalizer-on="medium">
+                      <div class="small-12 medium-6 column table" data-equalizer-watch>
+                        <div class="table-cell align-middle">
+                          <h2><%= budget.name %></h2>
+                        </div>
+                      </div>
+
+                      <div class="small-12 medium-6 column table" data-equalizer-watch>
+                        <div id="budget_<%= budget.id %>_results" class="table-cell align-middle">
+                          <div>
+                            <%= link_to t("budgets.index.see_results"),
+                                        budget_results_path(budget.id),
+                                        class: "button" %>
+                          </div>
+                          <div>
+                            <%= link_to t("budgets.index.milestones"),
+                                        budget_executions_path(budget.id),
+                                        class: "button" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="expanded budget no-margin-top margin-bottom">
+      <div class="row">
+        <div class="small-12 medium-9 column padding">
+          <h1><%= t("budgets.index.title") %></h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 column">
+        <div class="callout primary">
+          <%= t("budgets.index.empty_budgets") %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

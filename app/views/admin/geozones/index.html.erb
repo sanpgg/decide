@@ -1,0 +1,59 @@
+<%= link_to t("admin.geozones.index.create"),
+              new_admin_geozone_path, class: "button float-right" %>
+
+<h2 class="inline-block"><%= t("admin.geozones.index.title") %></h2>
+
+<h1>Aqui va la imagen</h1>
+<tr class="<%= @image_map.name %>">
+  <td class="small-12 medium-4">
+    <strong><%= @image_map.name %></strong> (<%= @image_map.required_width %>x<%= @image_map.required_height %>)
+  </td>
+  <td class="small-12 medium-8">
+    <%= form_for([:admin, @image_map], html: { id: "edit_#{dom_id(@image_map)}"}) do |f| %>
+      <div class="small-12 medium-6 large-6 column">
+        <%= image_tag @image_map.image.url if @image_map.image.exists? %>
+        <%= f.file_field :image, label: false %>
+      </div>
+      <div class="small-12 medium-6 large-6 column">
+        <%= f.submit(t('admin.site_customization.images.index.update'), class: "button hollow") %>
+        <%= link_to t('admin.site_customization.images.index.delete'), admin_site_customization_image_path(@image_map), method: :delete, class: "button hollow alert" if @image_map.image.exists? %>
+      </div>
+    <% end %>
+  </td>
+</tr>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("admin.geozones.geozone.name") %></th>
+      <th><%= t("admin.geozones.geozone.external_code") %></th>
+      <th><%= t("admin.geozones.geozone.census_code") %></th>
+      <th><%= t("admin.geozones.geozone.coordinates") %></th>
+      <th class="small-3"><%= t("admin.actions.actions") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @geozones.each do |geozone| %>
+      <tr id="<%= dom_id(geozone) %>">
+        <td><%= geozone.name %></td>
+        <td><%= geozone.external_code %></td>
+        <td><%= geozone.census_code %></td>
+        <td class="break"><%= geozone.html_map_coordinates %></td>
+        <td>
+          <div class="small-6 column">
+            <%= link_to t("admin.geozones.index.edit"),
+                        edit_admin_geozone_path(geozone),
+                        class: "button hollow expanded" %>
+          </div>
+          <div class="small-6 column">
+            <%= link_to t("admin.geozones.index.delete"),
+                        admin_geozone_path(geozone),
+                        method: :delete,
+                        class: "button hollow alert expanded" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

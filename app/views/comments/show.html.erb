@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="small-12 column margin-top">
+    <%= back_link_to user_path(current_user),
+                     t("comments.show.return_to_commentable") + @comment.commentable.title unless @commentable.class == Poll %>
+  </div>
+</div>
+
+<section class="comments">
+  <div class="row">
+    <div id="comments" class="small-12 column">
+      <%= render @comment %>
+    </div>
+  </div>
+</section>

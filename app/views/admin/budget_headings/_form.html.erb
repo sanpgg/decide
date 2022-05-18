@@ -1,0 +1,115 @@
+<style type="text/css">
+  
+  .hidden{
+    display: none;
+  }
+
+</style>
+
+<div class="small-12 medium-6">
+
+<!-- label: t("budgets.heading_types.linked_sector") -->
+
+  <%= form_for [:admin, @budget, @group, @heading], url: path do |f| %>
+
+    <%= f.select(:htype, budget_headings_select_type_options, { label: t("budgets.heading_types.type_title") }) %>
+
+    <%= f.label :suburb_id,
+      "Vincular colonia",
+      {
+        id: "suburb_label",
+        class: @heading.htype == "sector" ? "hidden" : ""
+      }
+      %>
+
+    <%= f.select(:suburb_id,
+                  budget_headings_select_suburbs_options(@budget),
+                  {
+                    label: false
+                  },
+                  {
+                    class: @heading.htype == "sector" ? "hidden" : ""
+                  })
+                %>
+
+    <%= f.label :sector,
+      "Vincular sector",
+      {
+        id: "sector_label",
+        class: @heading.htype == "suburb" ? "hidden" : "" 
+      }
+      %>
+
+    <%= f.select(:sector,
+                  budget_headings_select_sector_options(@budget),
+                  {
+                    label: false
+                  },
+                  {
+                    class: @heading.htype == "suburb" ? "hidden" : "" 
+                  })
+    %>
+
+    <!-- select(object, method, choices = nil, options = {}, html_options = {}, &block) -->
+
+    <%= f.text_field :name,
+                     label: t("admin.budget_headings.form.name"),
+                     maxlength: 50,
+                     placeholder: t("admin.budget_headings.form.name") %>
+
+    <%= f.text_field :price,
+                      label: t("admin.budget_headings.form.amount"),
+                      maxlength: 8,
+                      placeholder: t("admin.budget_headings.form.amount") %>
+
+    <%= f.label :population, t("admin.budget_headings.form.population") %>
+    <p class="help-text" id="budgets-population-help-text">
+      <%= t("admin.budget_headings.form.population_info") %>
+    </p>
+    <%= f.text_field :population,
+                      label: false,
+                      maxlength: 8,
+                      placeholder: t("admin.budget_headings.form.population"),
+                      data: {toggle_focus: "population-info"},
+                      aria: {describedby: "budgets-population-help-text"} %>
+
+    <%= f.text_field :latitude,
+                      label: t("admin.budget_headings.form.latitude"),
+                      maxlength: 22,
+                      placeholder: "latitude" %>
+
+    <%= f.text_field :longitude,
+                      label: t("admin.budget_headings.form.longitude"),
+                      maxlength: 22,
+                      placeholder: "longitude" %>
+
+    <%= f.cktext_area :description, maxlength: SpendingProposal.description_max_length, ckeditor: { language: I18n.locale }, label: false %>
+
+    <%= f.check_box :allow_custom_content, label: t("admin.budget_headings.form.allow_content_block") %>
+
+    <%= f.submit t("admin.budget_headings.form.#{action}"), class: "button success" %>
+  <% end %>
+</div>
+
+
+<script type="text/javascript">
+  document.getElementById('budget_heading_htype').addEventListener('change', function() {
+
+  if(this.value == 'suburb')
+  {
+    // Quitar clase hidden a segundo select y label
+    document.getElementById('budget_heading_suburb_id').classList.remove("hidden");
+    document.getElementById('budget_heading_sector').classList.add("hidden");
+    document.getElementById('suburb_label').classList.remove("hidden");
+    document.getElementById('sector_label').classList.add("hidden");
+  }
+  else
+  {
+    // Poner clase hidden a segundo select y label
+    document.getElementById('budget_heading_suburb_id').classList.add("hidden");
+    document.getElementById('budget_heading_sector').classList.remove("hidden");
+    document.getElementById('sector_label').classList.remove("hidden");
+    document.getElementById('suburb_label').classList.add("hidden");
+  }
+});
+</script>

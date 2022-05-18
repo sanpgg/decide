@@ -1,0 +1,126 @@
+<style>
+  #logo-siypc,
+  #logo-super {
+    width: 150px;
+  }
+  .footer {
+    margin-top: 4rem !important;
+    background: whitesmoke;
+    min-height: auto !important;
+  }
+  .social a:hover {
+    color: #00A550;
+    text-decoration: none;
+  }
+  li a {
+    font-size: 1rem !important;
+  }
+  footer a {
+    color: #222 !important;
+  }
+  footer .footer-sections {
+    padding-left: 20px !important;
+  }
+</style>
+<footer>
+  <div class="row" style="margin: 0 auto;">
+    <div class="small-12 large-4 column">
+      <h1 class="logo">
+        <%= image_tag(image_path_for('decide.png'), id: 'logo-sp', alt: t("layouts.header.logo")) %>
+      </h1>
+
+      <p class="info">
+        Este portal usa la aplicación CONSUL que es software de código abierto.</a>
+      </p>
+    </div>
+
+
+    <div class="footer-sections small-12 large-4 column">
+        <p class="info">
+          Iniciemos una nueva relación con la ciudad. Si tienes alguna duda, llamanos al <a href="tel:8112121212" target="_blank">81 1212 1212</a> o escríbenos a <a href="mailto:decide@sanpedro.gob.mx" target="_blank">decide@sanpedro.gob.mx</a>
+        </p>
+	<div class="clearfix"></div>
+      <p class="info">
+        Este programa es público, ajeno a cualquier partido político. Queda prohibido el uso para fines distintos a los establecidos en el programa.
+      </p>
+    </div>
+
+    <div class="small-12 large-4 column">
+      <div class="text-right social" style="display: none;">
+        <ul>
+          <% if setting['twitter_handle'] %>
+            <li class="inline-block">
+              <%= link_to "https://twitter.com/#{setting['twitter_handle']}", target: "_blank",
+                           title: t("shared.go_to_page") + t("social.twitter", org: setting['org_name']) + t('shared.target_blank_html') do %>
+                              <span class="show-for-sr"><%= t("social.twitter", org: setting['org_name']) %></span>
+                              <span class="icon-twitter" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if setting['facebook_handle'] %>
+            <li class="inline-block">
+              <%= link_to "https://www.facebook.com/#{setting['facebook_handle']}/", target: "_blank",
+                          title: t("shared.go_to_page") + t("social.facebook", org: setting['org_name']) + t('shared.target_blank_html') do %>
+                          <span class="show-for-sr"><%= t("social.facebook", org: setting['org_name']) %></span>
+                          <span class="icon-facebook" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+          <%  if setting['blog_url'] %>
+            <li class="inline-block">
+              <%= link_to setting['blog_url'], target: "_blank",
+                          title: t("shared.go_to_page") + t("social.blog", org: setting['org_name']) + t('shared.target_blank_html') do %>
+                          <span class="show-for-sr"><%= t("social.blog", org: setting['org_name']) %></span>
+                          <span class="icon-blog" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if setting['youtube_handle'] %>
+            <li class="inline-block">
+              <%= link_to "https://www.youtube.com/#{setting['youtube_handle']}", target: "_blank",
+                          title: t("shared.go_to_page") + t("social.youtube", org: setting['org_name']) + t('shared.target_blank_html') do %>
+                          <span class="show-for-sr"><%= t("social.youtube", org: setting['org_name']) %></span>
+                          <span class="icon-youtube" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if setting['telegram_handle'] %>
+            <li class="inline-block">
+              <%= link_to "https://www.telegram.me/#{setting['telegram_handle']}", target: "_blank",
+                          title: t("shared.go_to_page") + t("social.telegram", org: setting['org_name']) + t('shared.target_blank_html') do %>
+                          <span class="show-for-sr"><%= t("social.telegram", org: setting['org_name']) %></span>
+                          <span class="icon-telegram" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if setting['instagram_handle'] %>
+            <li class="inline-block">
+              <%= link_to "https://www.instagram.com/#{setting['instagram_handle']}", target: "_blank",
+                          title: t("shared.go_to_page") + t("social.instagram", org: setting['org_name']) + t('shared.target_blank_html') do %>
+                          <span class="show-for-sr"><%= t("social.instagram", org: setting['org_name']) %></span>
+                          <span class="icon-instagram" aria-hidden="true"></span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <ul class="no-bullet inline-block text-right move-right" style="float:right">
+        <li class=""><%= link_to t("layouts.footer.conditions"), 'https://transparencia.sanpedro.gob.mx/documentosAvisosPrivacidad/ 5309/_2022328_80_Presupuesto Participativo Decide San Pedro.pdf', target: '_blank' %><br></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+<div class="subfooter" style="display: none; background: black;">
+  <div class="row" style="margin: 0 auto;">
+    <div class="small-12 medium-8 column">
+        <%= image_tag(image_path_for('siypc.png'), id: 'logo-siypc', alt: t("layouts.header.logo")) %>
+    </div>
+
+    <div class="small-12 medium-4 column social" style="display:none;">
+      <div class="text-right">
+        <%= image_tag(image_path_for('super.png'), id: 'logo-super', alt: t("layouts.header.logo")) %>
+      </div>
+    </div>
+  </div>
+</div>

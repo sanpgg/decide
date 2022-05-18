@@ -1,0 +1,803 @@
+  <link rel="stylesheet" media="screen" href="/welcome.css">
+  <!-- header is _new_user_header.html.erb on layouts -->
+  <!-- Title -->
+  <div class="aqua-fluid row text-center" style="margin: 0 auto;">
+    <h3 class="" style="font-family: Arial !important;margin: 0 auto;"><b>Presupuesto Participativo<b/></h3>
+  </div>
+  <!-- End Title -->
+
+  <!-- Subtitle -->
+  <div class="aqua-fluid row text-center" style="margin: 0 auto;">
+    <p class="bane" style="font-family: Arial, Sans-serif;margin: 0 auto;"><b>Hagamos <span class="fs7" style="font-family:Times, serif;font-weight: lighter;">ciudad</span> con tus</b> <span class="ideas"><b>ideas</b></span></p>
+  </div>
+  <div class="aqua-fluid row text-center" style="margin: 0 auto;margin-bottom: 3rem;">
+    <p class="bane2" style="font-family: Arial, Sans-serif;margin: 0 auto;">Hay <b>100 millones de pesos</b><br> para implementar grandes proyectos<br> y mejorar tu ciudad.</p>
+  </div>
+  <!-- End Subtitle -->
+
+  <div class="clearfix"></div>
+
+  <!-- Participa -->
+  <div class="aqua-fluid row text-center" style="margin: 0 auto;">
+    <div class="col-md-12 m-0 mx-0" style="margin-bottom: 2rem !important;">
+      <%= link_to content_tag(:div, "", id:"span", class:"bk-pinky")+'¡Participa!',
+              budgets_path,
+              { class: 'rounded-0 rounded-pink',
+                rel: 'nofollow',
+                style:'' } %>
+    </div>
+  </div>
+  <!-- End Participa -->
+
+  <div class="clearfix"></div>
+
+  <!-- Que Es -->
+  <div class="bk-gray aqua-fluid py-3 text-center dnone-mobile">
+    <div class="rowo">
+      <div class="mx-auto col-md-12">
+        <h1 id="rowo-child" style="color: black;">¿Qué es el presupuesto participativo?</h1>
+      </div>
+    </div>
+  </div>
+  <!-- End Que Es -->
+
+  <div class="clearfix"></div>
+
+  <!-- Mensaje -->
+  <div class="py-1 text-center" id="speakers">
+    <div class="aqua-fluid">
+      <div class="rowo">
+        <div class="col-md-12 m-0 mx-0">
+          <p class="lead" style="color: black;">
+            Cada año, todos los ciudadanos de San Pedro tenemos la oportunidad de decidir cómo invertir una parte de nuestro presupuesto municipal.
+            <br><br>
+            Tenemos 100 millones de pesos dispuestos a financiar proyectos que mejoran nuestra comunidad y resuelvan problemas públicos.
+            <br><br>
+            ¡Y todos podemos ayudar a elegir!
+          </p>
+          <div class="fondo-right"><%= image_tag(image_path_for('dsp.png'), id: 'dsp', class: 'float-left', alt: t("layouts.header.logo")) %> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Mensaje -->
+
+  <!-- Titulo Etapas -->
+  <div class="bk-gray aqua-fluid py-3 text-center dnone-mobile">
+    <div class="rowo">
+      <div class="mx-auto col-md-12">
+        <h1 id="rowo-child" style="color: black;">¿Cuáles son las etapas de Decide San Pedro?</h1>
+      </div>
+    </div>
+  </div>
+  <!-- End Titulo Etapas -->
+
+  <div class="clearfix"></div>
+
+  <!-- Etapas -->
+  <div class="py-1 text-center" id="steps">
+    <div class="aqua-fluid mb-4">
+      <div class="rowo">
+
+        <div class="col-12 col-lg-4 animate-in-left separador-bottom ">
+          <h2><a style="color: black" href="/users/sign_in">Regístrate</a></h2>
+          <p class="text-center">del 1 de Abril al 17 de Julio</p>
+          <div class="circulo-shape bk-yellow">1</div>
+          <p class="text-center" style="margin-top: 50px;">En menos de 2 minutos y con<br>ayuda de tu INE actualizada</p>
+        </div>
+
+        <div class="col-12 col-lg-4 animate-in-left separador-bottom ">
+          <h2><a style="color: black" href="/presupuestos">Manda tu propuesta</a></h2>
+          <p class="text-center">del 1 de Abril al 1 de Mayo</p>
+          <div class="circulo-shape bk-orange">2</div>
+          <p class="text-center" style="margin-top: 50px;">Explora las 8 causas<br>y envía tu propuesta</p>
+        </div>
+
+        <div class="col-12 col-lg-4 animate-in-left separador-bottom ">
+          <h2><a style="color: black" href="/presupuestos">Decide</a></h2>
+          <p class="text-center">del 8 al 17 de Julio</p>
+          <div class="circulo-shape bk-pink" style="">3</div>
+          <p class="text-center" style="margin-top: 50px;">Decide qué propuestas quieres<br>ver suceder en tu sector y en tu colonia</p>
+         </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End Etapas -->
+
+  <div class="clearfix"></div>
+
+  <!-- Titulo causas -->
+  <div class="bk-gray aqua-fluid py-3 text-center">
+    <div class="rowo">
+      <div class="mx-auto col-md-12">
+        <h1 id="rowo-child" style="color: black;">Elige tu causa y sube tu proyecto</h1>
+      </div>
+    </div>
+  </div>
+  <!-- End Titulo causas -->
+
+  <!-- Causas -->
+  <div id="listado" class="section bg-faded text-center mb-4" style="padding-top:2.5rem !important">
+    <div class="aqua">
+      <div class="accordion container my-4" id="accordionFaqNeighbors">
+        <div class="row">
+          <div class="col col-md-10 col-lg-12">
+            <!-- Medio Ambiente -->
+            <div class="card">
+              <%= image_tag(image_path_for('1.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingFour">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Medio Ambiente
+                    <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFaqNeighbors">
+                <div class="card-body">
+                    <ul>
+                      <li>Banquetas arboladas</li>
+                      <li>Reforestación con árboles nativos</li>
+                      <li>Diagnóstico de salud de árboles y combate a plagas</li>
+                      <li>Educación ambiental comunitaria</li>
+                      <li>Reciclaje</li>
+                      <li>Jardines polinizadores</li>
+                      <li>Cisternas para agua tratada</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Cultura y Deportes -->
+            <div class="card mb-2">
+              <%= image_tag(image_path_for('2.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingFive">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive1" aria-expanded="false" aria-controls="collapseFive">
+                    Cultura y Deportes
+                    <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseFive1" class="collapse" aria-labelledby="headingFive" data-parent="#accordionFaqNeighbors" style="">
+                <div class="card-body">
+                  <ul>
+                    <li>Ampliar skate park Revolución</li>
+                    <li>Ampliar bikepark Poniente</li>
+                    <li>Remodelar Casa de Cultura la Cima</li>
+                    <li>Rehabilitar baños y patio del Centenario</li>
+                    <li>Mejorar gimnasios</li>
+                    <li>Actividades artísticas y deportivas gratuitas</li>
+                    <li>Paradas de transporte incluyentes</li>
+                    <li>Banquetas seguras y accesibles</li>
+                    <li>Murales comunitarios</li>
+                    <li>Huertos comunitarios</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Seguridad -->
+            <div class="card mb-2">
+              <%= image_tag(image_path_for('3.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Seguridad
+                    <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFaqNeighbors" style="">
+                <div class="card-body">
+                  <ul>
+                    <li>Centro de prevención de violencias</li>
+                    <li>Rehabilitación de personas en adicción</li>
+                    <li>Programas anti bullying</li>
+                    <li>Regenerar parque Vista Montaña</li>
+                    <li>Luminarias para vialidades</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Inclusion -->
+            <div class="card mb-2">
+              <%= image_tag(image_path_for('4.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo">
+                    Inclusión
+                    <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFaqNeighbors" style="">
+                <div class="card-body">
+                  <ul>
+                    <li>Más y mejores centros comunitarios</li>
+                    <li>Apoyo a personas cuidadoras de infancias, adultos mayores y personas con discapacidad</li>
+                    <li>Atención a la primera infancia</li>
+                    <li>Envejecimiento activo y saludable</li>
+                    <li>Escaleras en Canteras</li>
+                    <li>Murales comunitarios</li>
+                    <li>Huertos comunitarios</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Impulso Economico -->
+            <div class="card mb-2">
+              <%= image_tag(image_path_for('5.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree">
+                    Impulso económico
+                    <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree1" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFaqNeighbors" style="">
+                <div class="card-body">
+                  <ul>
+                    <li>Diplomado en análisis de datos</li>
+                    <li>Mercado del Casco</li>
+                    <li>Formación para el empleo</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Parques y Jardines -->
+            <div class="card mb-2">
+              <%= image_tag(image_path_for('6.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Parques y Jardines
+                  <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                <div class="card-body">
+                  <ul>
+                    <li>12 obras de regeneración de parques</li>
+                    <li>Equipamiento de calistenia y ejercicio</li>
+                    <li>Malla sombras</li>
+                    <li>Juegos infantiles</li>
+                    <li>Canchas deportivas</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Educacion -->
+            <div class="card">
+              <%= image_tag(image_path_for('7.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingFour">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour1" aria-expanded="false" aria-controls="collapseFour">
+                    Educación
+                    <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseFour1" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFaqNeighbors">
+                <div class="card-body">
+                    <ul>
+                      <li>Obras de rehabilitación de más de 18 primarias y secundarias públicas</li>
+                      <li>Ampliar Biblioteca Josefina Mata Siller</li>
+                      <li>Ampliar Bibliociber El Obispo</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Movilidad -->
+            <div class="card mb-2">
+              <%= image_tag(image_path_for('8.png'), id: 'municipio', class: 'float-right iconsin', alt: t("layouts.header.logo")) %>
+              <!-- image -->
+              <div class="card-header py-1" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne">
+                  Movilidad
+                  <div class="div-block-8"></div>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseOne1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                <div class="card-body">
+                  <ul>
+                    <li>Bicis y scooters eléctricos</li>
+                    <li>Cruces seguros</li>
+                    <li>Semáforos inteligentes</li>
+                    <li>Zonas escolares seguras</li>
+                    <li>Paradas incluyentes de transporte</li>
+                    <li>Banquetas seguras y accesibles</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Causas -->
+
+  <div class="clearfix"></div>
+
+  <!-- Proyectos a hacer -->
+    <div class="bk-gray aqua-fluid py-3 text-center dnone-mobile" style="border-top: none;border-bottom: none;">
+      <div class="rowo">
+        <div class="mx-auto col-md-12">
+          <h1 id="rowo-child" style="color: black;width: 65% !important;margin: 0 auto;">Conoce los proyectos que sucederán este año y que no tienes que proponer</h1>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="aqua-fluid row text-center dnone-mobile" style="margin: 0 auto;">
+      <div class="small-12 medium-12 column">
+        <section class="latest-blog-posts bg-white pt60 pb60" style="margin-bottom:3rem;margin-top: 3rem;">
+          <div class="container-fluid">
+            <div id="owl-demo-1" class="owl-carousel owl-theme">
+
+              <article class="thumbnail item" style="width: 100%">
+                <div class="container">
+                  <%= image_tag(image_path_for('Proyectos-01.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                </div>
+              </article>
+
+              <article class="thumbnail item" style="width: 100%">
+                <div class="container">
+                  <%= image_tag(image_path_for('Proyectos-02.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                </div>
+              </article>
+
+              <article class="thumbnail item" style="width: 100%">
+                <div class="container">
+                  <%= image_tag(image_path_for('Proyectos-03.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                </div>
+              </article>
+
+              <article class="thumbnail item" style="width: 100%">
+                <div class="container">
+                  <%= image_tag(image_path_for('Proyectos-05.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                </div>
+              </article>
+
+              <article class="thumbnail item" style="width: 100%">
+                <div class="container">
+                  <%= image_tag(image_path_for('Proyectos-06.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                </div>
+              </article>
+
+               <article class="thumbnail item" style="width: 100%">
+                <div class="container">
+                  <%= image_tag(image_path_for('Proyectos-04.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                </div>
+              </article>
+
+            </div><!-- #owl-demo-2 -->
+            <div class="customNavigation">
+              <span class="pager-left"><a class="prev click-p"><%= image_tag(image_path_for('left.png'), id: '', alt: t("layouts.header.logo")) %></a></span>
+              <span class="pager-right"><a class="next click-n"><%= image_tag(image_path_for('right.png'), id: '', alt: t("layouts.header.logo")) %></a></span>
+            </div>
+          </div><!-- .containerlfuid -->
+        </section>
+      </div>
+    </div>
+    <!-- End proyectos a hacer -->
+
+  <div class="clearfix"></div>
+
+  <!-- Banner casos -->
+  <div class="aqua-fluid text-right">
+    <div class="rowo">
+      <div class="mx-auto col-md-10">
+        <div class="dnone-mobile" style="width: 400px;float: right;">
+          <div class="circulo-shape2 bk-yellow2" style="font-family:Times, serif;">Casos de éxito</div>
+        </div>
+    </div>
+  </div>
+  <!-- End Banner casos -->
+
+  <div class="clearfix"></div>
+
+  <!-- Proyectos anteriores -->
+  <div class="bk-gray aqua-fluid py-3 text-center dnone-mobile" style="border-top: none;border-bottom: none;">
+    <div class="rowo">
+      <div class="mx-auto col-md-12">
+        <h1 id="rowo-child" style="color: black;width: 65% !important;margin: 0 auto;">Conoce lo que hicieron realidad tus vecinos en ediciones anteriores</h1>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="aqua-fluid row text-center dnone-mobile" style="margin: 0 auto;">
+    <div class="small-12 medium-12 column">
+      <section class="latest-blog-posts bg-white pt60 pb60" style="margin-bottom:3rem;margin-top: 3rem;">
+        <div class="container-fluid">
+          <div id="owl-demo-2" class="owl-carousel owl-theme">
+
+            <article class="thumbnail item" style="width: 100%">
+              <div class="container">
+                <%= image_tag(image_path_for('01_Estacion Bomberos.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+              </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+              <div class="container">
+                <%= image_tag(image_path_for('02_Ruta Reciclaje.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+              </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+               <div class="container">
+                 <%= image_tag(image_path_for('03_Casa Cultura.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+               <div class="container">
+                 <%= image_tag(image_path_for('04_Banqueta_Rio_StaCatarina.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+               <div class="container">
+                 <%= image_tag(image_path_for('05_Banqueta_ValleOte.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+               <div class="container">
+                 <%= image_tag(image_path_for('06_Monitores.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+                 <div class="container">
+                 <%= image_tag(image_path_for('07_Huertos.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+                 <div class="container">
+                 <%= image_tag(image_path_for('08_CentroTampiquito.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+            <article class="thumbnail item" style="width: 100%">
+                 <div class="container">
+                 <%= image_tag(image_path_for('09_ParquePajaroCarp.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+               </div>
+            </article>
+
+             <article class="thumbnail item" style="width: 100%">
+                   <div class="container">
+                   <%= image_tag(image_path_for('10.Resultados.png'), id: 'logros', class: '', alt: t("layouts.header.logo")) %>
+                 </div>
+              </article>
+
+            <article class="thumbnail item">
+              <div class="container">
+                <div class="rowo">
+                  <h1 style="color: #151515;font-size: 1.5rem;padding-left: 20px;width: 100%;text-align: left;">Mejoras en 102 parques y jardines del municipio:</h1>
+                  <span style="width: 100%;text-align: left;padding-left: 20px;margin-bottom: 1rem;">Gracias a Julio hay una cancha nueva en Villitas del Obispo</span>
+                  <div class="small-12 medium-6 column">
+                      <h2 class="titleinterno">Antes</h2>
+                      <%= image_tag(image_path_for('2-antes.jpg'), id: '', class: 'max3', alt: t("layouts.header.logo")) %>
+                  </div>
+                  <div class="small-12 medium-6 column">
+                      <h2 class="titleinterno">Después</h2>
+                      <%= image_tag(image_path_for('2-despues.jpg'), id: '', class: 'max3', alt: t("layouts.header.logo")) %>
+                  </div>
+                  <h3 style="text-align: center;margin: 0 auto;margin-top: 1rem;font-weight: bold !important;font-size: 2rem;"></h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="thumbnail item">
+              <div class="container">
+                <div class="rowo">
+                  <h1 style="color: #151515;font-size: 1.5rem;padding-left: 20px;width: 100%;text-align: left;">Nuevos espacios públicos: </h1>
+                  <span style="width: 100%;text-align: left;padding-left: 20px;margin-bottom: 1rem;">Gracias a Caro y a Juan tenemos un Bici Parque en Plan de Ayala</span>
+                  <div class="small-12 medium-6 column">
+                      <h2 class="titleinterno">Antes</h2>
+                      <%= image_tag(image_path_for('3-antes.jpg'), id: '', class: 'max3', alt: t("layouts.header.logo")) %>
+                  </div>
+                  <div class="small-12 medium-6 column">
+                      <h2 class="titleinterno">Después</h2>
+                      <%= image_tag(image_path_for('3-despues.jpg'), id: '', class: 'max3', alt: t("layouts.header.logo")) %>
+                  </div>
+                  <h3 style="text-align: center;margin: 0 auto;margin-top: 1rem;font-weight: bold !important;font-size: 2rem;"></h3>
+                </div>
+              </div>
+            </article>
+
+            <article class="thumbnail item">
+              <div class="container">
+                <div class="rowo">
+                  <h1 style="color: #151515;font-size: 1.5rem;padding-left: 20px;width: 100%;text-align: left;">53 actividades y talleres con más de 6625 beneficiarios: </h1>
+                  <div class="small-12 medium-6 column">
+                      <h2 style="font-size: 1.2rem;width: 100%;text-align: left;padding-left: 20px;margin-bottom: 1rem;">Rehabilitación del adulto mayor gracias a Laurencia</h2>
+                      <%= image_tag(image_path_for('4-2.jpeg'), id: '', class: 'max3', alt: t("layouts.header.logo")) %>
+                  </div>
+                  <div class="small-12 medium-6 column">
+                      <h2 style="font-size: 1.2rem;width: 100%;text-align: left;padding-left: 20px;margin-bottom: 1rem;">Taller de teatro gracias a Gaby</h2>
+                      <%= image_tag(image_path_for('4-3.jpeg'), id: '', class: 'max3', alt: t("layouts.header.logo")) %>
+                  </div>
+                  <h3 style="text-align: center;margin: 0 auto;margin-top: 1rem;font-weight: bold !important;font-size: 2rem;"></h3>
+                </div>
+              </div>
+            </article>
+
+
+
+          </div><!-- #owl-demo-2 -->
+          <div class="customNavigation">
+            <span class="pager-left"><a class="prev click-p1"><%= image_tag(image_path_for('left.png'), id: '', alt: t("layouts.header.logo")) %></a></span>
+            <span class="pager-right"><a class="next click-n1"><%= image_tag(image_path_for('right.png'), id: '', alt: t("layouts.header.logo")) %></a></span>
+          </div>
+        </div><!-- .containerlfuid -->
+      </section>
+    </div>
+  </div>
+  <!-- End proyectos anteriores -->
+
+  <div class="clearfix"></div>
+
+  <!-- Faq -->
+  <div class="bk-gray aqua-fluid py-3 text-center" style="display">
+    <div class="rowo">
+      <div class="mx-auto col-md-12">
+        <h1 id="rowo-child" style="color: black;">Preguntas frecuentes</h1>
+      </div>
+    </div>
+  </div>
+
+    <!-- Speakers -->
+    <div class="py-1  text-center" id="speakers" style="background: white !important;background-color: white !important;">
+      <div class="aqua-fluid mb-5 mt-4">
+        <div class="aqua">
+          <div class="accordion container my-4" id="accordionFaqNeighbors">
+            <div class="row">
+              <div class="col col-md-12 col-lg-12">
+
+                <div class="card mb-2">
+                  <div class="card-header py-1" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne39" aria-expanded="false" aria-controls="collapseOne">
+                      De los requisitos para participar
+                      <div class="div-block-8"></div>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne39" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                    <div class="card-body">
+                      <h6><b>¿Por qué tengo que subir foto de mi INE?</b></h6>
+                      <p>
+                        Para acreditar tu identidad, en conformidad con el artículo 8 del Reglamento vigente de participación y Atención Ciudadana de San Pedro.
+                      </p>
+                      <h6><b>¿Por qué necesito un correo electrónico?</b></h6>
+                      <p>
+                      Porque es la única forma de crear un usuario en la plataforma y registrar ideas y votar. Con el correo electrónico podemos comunicarnos contigo si necesitamos aclaraciones de tu idea, o para anunciarte los siguientes pasos en caso de que resulte ganadora.<br>Si no tienes un correo electrónico llama al teléfono <a href="tel:8112121212" target="_blank">81 1212 1212</a> de Lunes a Domingo de 8am a 8pm para que te orienten y apoyen para crear uno.
+                      </p>
+                      <h6><b>¿Quiénes pueden participar?</b></h6>
+                      <p>Todas las personas que tengan identificación de San Pedro y vivan en San Pedro. </p>
+                      <h6><b>¿Por qué no puedo proponer en más de una colonia o sector si tengo propiedades en más de una colonia o sector?</b></h6>
+                      <p>
+                        El derecho de participación es de la persona (que solo puede votar una vez).  La persona propone y vota para mejorar la comunidad donde reside la mayor parte del tiempo.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mb-2">
+                  <div class="card-header py-1" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne33" aria-expanded="false" aria-controls="collapseOne">
+                        De los presupuestos
+                      <div class="div-block-8"></div>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne33" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                    <div class="card-body">
+                      <h6><b>¿Puedo proponer donar el presupuesto de mi colonia o sector a otra colonia o sector?</b></h6>
+                      <p>
+                        ¡Claro que sí! La generosidad en nuestro municipio es muy importante.<br>Para ello cuando registres tu propuesta en tu colonia o tu sector, en el nombre de la propuesta o en la descripción describe por qué crees que es importante un proyecto en el sitio donde quieren donar este presupuesto. Si tus vecinos votan por tu propuesta, entonces habrás logrado donar su presupuesto.
+                      </p>
+                      <h6><b>¿Puedo sumar presupuestos con otra colonia?</b></h6>
+                      <p>
+                        ¡Claro que sí! Para hacerlo, ponte de acuerdo con personas de otras colonias y suban cada uno la misma propuesta. Esto hará que si ambas resultan ganadoras, los presupuestos de ambas colonias irán al mismo proyecto ganador.
+                      </p>
+                      <h6><b>¿Puedo sumar el presupuesto de mi colonia al presupuesto del año siguiente?</b></h6>
+                      <p>No. Cada presupuesto corresponde a un año fiscal y no puede sumarse al año siguiente.</p>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mb-2">
+                  <div class="card-header py-1" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne23" aria-expanded="false" aria-controls="collapseOne">
+                        De la selección de propuestas
+                      <div class="div-block-8"></div>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne23" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                    <div class="card-body">
+                      <h6><b>¿Qué pasa si hay un empate?</b></h6>
+                      <p>
+                        En caso de empate del proyecto de colonia organizaremos una asamblea con tus vecinas y vecinos para decidir.<br>En caso de empate de proyecto de sector, organizaremos un Consejo Sectorial con todas las y los presidentes de colonia para decidir.
+                      </p>
+                      <h6><b>¿Puedo conocer la votación en tiempo real?</b></h6>
+                      <p>
+                        No, la votación se dará a conocer al final de la etapa de votaciones.
+                      </p>
+                      <h6><b>¿Qué se necesita para que una propuesta sea factible?</b></h6>
+                      <p>Para que una propuesta sea factible debe cumplir con las siguientes:</p>
+                      <ul>
+                        <li><b>factibilidad económica:</b> que la propuesta se ajuste al presupuesto</li>
+                        <li><b>factibilidad técnica:</b> que la propuesta pueda implementarse en el lugar propuesto, sea pertinente, costo efectiva y solucione un problema diagnosticado</li>
+                        <li><b>factibilidad jurídica:</b> que la propuesta no contravenga disposiciones legales</li>
+                      </ul>
+                      <h6><b>¿Qué pasa si ningún proyecto de mi colonia se determina como factible? ¿Qué pasa con este presupuesto?</b></h6>
+                      <p>En caso de que ningún proyecto sea viable en una colonia, el monto asignado se reintegra al presupuesto Municipal. Sin embargo, hay decenas de proyectos factibles en este catálogo que pueden resolver un problema en muchas zonas del municipio. Anímate a proponerlos aunque no estén dentro de los límites de tu colonia.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mb-2">
+                  <div class="card-header py-1" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne63" aria-expanded="false" aria-controls="collapseOne">
+                        Del registro de propuestas
+                      <div class="div-block-8"></div>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne63" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                    <div class="card-body">
+                      <h6><b>¿Puedo proponer cosas fuera de este catálogo?</b></h6>
+                      <p>
+                        Sí, durante la etapa de factibilidad evaluaremos si es viable o no someterla a votación.
+                      </p>
+                      <h6><b>¿Puedo proponer proyectos por etapas?</b></h6>
+                      <p>
+                        Depende de si la etapa es funcional por sí misma. No podemos hacer proyectos que queden incompletos.
+                      </p>
+                      <h6><b>¿Cuántas propuestas puedo hacer? </b></h6>
+                      <p>Solamente podrás subir una propuesta para colonia, y una para sector. Si tienes más ideas, promociona el programa con tus vecinos(as) y busca que la suban. </p>
+
+                      <h6><b>¿Cuál es el rol de la mesa directiva en el presupuesto participativo? </b></h6>
+                      <p>Las mesas directivas de las juntas de vecinos tienen un rol muy importante en este programa. Pueden convocar asambleas para que entre varias personas dialoguen sobre las necesidades principales de su entorno, definan prioridades y organicen recorridos para definir proyectos en conjunto entre varias colonias.</p>
+
+                      <h6><b>¿Qué pasa si nadie sube una propuesta en mi junta o sector? </b></h6>
+                      <p>En caso de que ningún proyecto se proponga en la junta o sector, el monto asignado se reintegra al presupuesto Municipal.</p>
+
+                      <h6><b>¿Qué pasa con los recursos remanentes una vez que se entrega el proyecto?  </b></h6>
+                      <p>Los Consejos Sectoriales, compuestos por las y los presidentes de las colonias de un sector, definen en qué proyectos de los registrados en la plataforma pueden invertir los remanentes.</p>
+
+                      <h6><b>¿Puedo proponer proyectos en mi colonia si es régimen de condominio?</b></h6>
+                      <p>No, sólo es viable proponer proyectos en espacios públicos municipales, como las calles o parques fuera de tu colonia.</p>
+
+                      <h6><b>¿Puedo proponer proyectos en mi colonia si es de acceso controlado?</b></h6>
+                      <p>Los proyectos que estén en una calle o parque municipales pero que estén en colonias con control de acceso serán factibles sólo si las personas pueden acceder a estos espacios sin ningún impedimento. El Municipio hará visitas aleatorias y sin previo aviso para constatar cumplimiento. En caso de incumplimiento, en el siguiente ejercicio de presupuesto participativo será inviable invertir en estos espacios.</p>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mb-2">
+                  <div class="card-header py-1" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link btn-block text-left text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne43" aria-expanded="false" aria-controls="collapseOne">
+                        De la ejecución de proyectos ganadores
+                      <div class="div-block-8"></div>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne43" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFaqNeighbors" style="">
+                    <div class="card-body">
+                      <h6><b>¿Cómo se ejecutan los proyectos?</b></h6>
+                      <p>
+                        Cada proyecto tiene su propio proceso de implementación con un tiempo que varía dependiendo la complejidad del proyecto y de las características específicas de la ubicación donde se llevará a cabo. Los proyectos pueden ejecutarse de 6 meses a dos años dependiendo sus características.<br>Hay 5 fases principales por las que pasa cualquier proyecto:
+                      </p>
+                      <ul>
+                        <li>Elaboración de anexo técnico o proyecto ejecutivo</li>
+                        <li>Cotización</li>
+                        <li>Contratación de proveedor que ejecutará el proyecto</li>
+                        <li>Ejecución</li>
+                        <li>Entrega</li>
+                      </ul>
+                      <p>En cada uno de estos 5 pasos haremos un protocolo de comunicación con la persona que subió el proyecto y con la mesa directiva de la Junta de Vecinos, para obtener retroalimentación y resolver dudas de su parte.</p>
+                      <h6><b>Si yo subo la propuesta y resulta ganadora, ¿puede el municipio contratarme para llevarla a cabo?</b></h6>
+                      <p>
+                        No, si tú propones no puedes ejecutar la propuesta.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+            <div class="col col-md-12 col-lg-12">
+              <div class="sidebar-card" style="background: white;padding: 1.5rem;text-align: left;">
+                <h2 style="text-align: center;margin-top: 30px;"><b>¿Problemas técnicos?</b></h2>
+                <p style="font-size: 1.2rem;margin-bottom: 0px;text-align: center;margin-top: 30px;">Te apoyamos con mucho gusto, puedes marcarnos o escribirnos por WhatsApp al <a href="tel:8112121212" target="_blank">81 1212 1212</a> de Lunes a Domingo de 8am a 8pm, o escríbenos a <a href="mailto:decide@sanpedro.gob.mx" target="_blank">decide@sanpedro.gob.mx</a>.</p>
+                <br>
+                <a class="button hollow expanded" style="font-size: 1rem;margin-bottom: 0px;width: 300px;margin: 0 auto;" target="_blank" href="/docs/guia_pp22.pdf">Descarga la guía práctica</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="footer" style="margin-top: 0px !important">
+      <%= render 'layouts/footer' %>
+    </div>
+    <!-- Footer -->
+    <!-- JavaScript dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <!-- Script: Smooth scrolling between anchors in the same page -->
+    <script src="/portal/js/smooth-scroll.js" style=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" integrity="sha512-/bOVV1DV1AQXcypckRwsR9ThoCj7FqTV2/0Bm79bL3YSyLkVideFLE3MIZkq1u5t28ke1c0n31WYCOrO01dsUg==" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        var owl = $("#owl-demo-2");
+        owl.owlCarousel({
+            items : 1,
+            itemsDesktop : [992,3],
+            itemsDesktopSmall : [768,2],
+            itemsTablet: [480,2],
+            itemsMobile : [320,1],
+            loop:true,
+            navRewind: true
+        });
+        $(".click-n1").click(function(){ owl.trigger('next.owl.carousel'); });
+        $(".click-p1").click(function(){ owl.trigger('prev.owl.carousel'); });
+
+        $('.latest-blog-posts .thumbnail.item').matchHeight();
+
+        var owl1 = $("#owl-demo-1");
+        owl1.owlCarousel({
+            items : 1,
+            itemsDesktop : [992,3],
+            itemsDesktopSmall : [768,2],
+            itemsTablet: [480,2],
+            itemsMobile : [320,1],
+            loop:true,
+            navRewind: true
+        });
+        $(".click-n").click(function(){ owl1.trigger('next.owl.carousel'); });
+        $(".click-p").click(function(){ owl1.trigger('prev.owl.carousel'); });
+
+        $('.latest-blog-posts1 .thumbnail.item').matchHeight();
+
+      });
+      $( document ).ready(function() {
+
+          $( ".btn-link" ).on( "click", function() {
+
+            if($(this).hasClass('mydivclass')==false){
+                $(this).addClass("mydivclass");
+                var padre = $(this).parent();
+                $(padre).parent().addClass("mydivclassa");
+            }else{
+                $(this).removeClass("mydivclass");
+                var padre = $(this).parent();
+                $(padre).parent().removeClass("mydivclassa");
+            }
+          });
+      });
+    </script>

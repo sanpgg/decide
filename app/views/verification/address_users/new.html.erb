@@ -1,0 +1,92 @@
+<style>
+label[for="address_user_full_address"]{
+    visibility: hidden;
+    position: relative;
+}
+label[for="address_user_full_address"]:after{
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content:'Dirección:';
+}
+</style>
+<div class="verification account row">
+  <%track_event(category: "verification", action: "success_census" )%>
+  <div class="small-12 column">
+    <div class="text-center">
+
+      <div class="small-6 column verification-step completed">
+        <span class="number">1</span> <%= t("verification.step_1") %>
+      </div>
+      <div class="small-6 column verification-step is-active">
+        <span class="number">2</span> <%= t("verification.step_2_confirm_address") %>
+      </div>
+    </div>
+
+    <div class="progress small-12 success">
+      <span class="meter" style="width: 66%"></span>
+    </div>
+
+    <div class="small-12 column">
+      <% if current_user.sector == 'MANUAL' %>
+        <h4 style="color:red"><%= t("verification.user_address.new.fail_address") %></h4>
+      <% else %>
+        <h4><%= t("verification.user_address.new.instruction") %></h4>
+      <% end %>
+    </div>
+
+    <div class="small-12 column">
+      <%= form_for @address_user, url: new_address_user_path, method: :get, html: {  class: "Direccion" } do |f| %>
+  			<%= f.text_field :full_address %>
+        <%= f.submit "Buscar" %>
+      <% end %>
+    </div>
+    <div class="small-12 column">
+        <%= form_for @address_user, as: "address_user_confirm", url: address_user_path, html: { multipart: true } do |f| %>
+          <%= render "shared/errors", resource: @address_user %>
+          <div class="row">
+            <div class="small-12 column">
+              <%= render_map(@map_location, "map", true, t("proposals.form.map_remove_marker")) %>
+              <%= f.fields_for :address_user, @address_user do |m_l_fields| %>
+                <%= m_l_fields.hidden_field :id,
+                  value: @address_user.id,
+                  id: map_location_input_id('proposal', 'id') %>
+                <%= m_l_fields.hidden_field :latitude,
+                  value: @address_user.latitude,  data: {:latitude =>'latitude'},
+                  id: "map_map_location_attributes_latitude" %>
+                <%= m_l_fields.hidden_field :longitude,
+                  value: @address_user.longitude,
+                  id: "map_map_location_attributes_longitude" %>
+                <%= m_l_fields.hidden_field :zoom,
+                  value: @address_user.zoom,
+                              id: map_location_input_id('proposal', 'zoom') %>
+              <% end %>
+            </div>
+
+            <div class="actions small-12 medium-6 large-4 end column">
+              <%= f.submit "Continuar", class: "button success" %>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+<!-- Aqui va el mapa   -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", ready);
+  // window.onload = function() {
+  //   alert('Mapaaaaaaaaa');
+  //   document.getElementById('remove-marker-link-new_map_location').click();
+  //};
+
+  function ready() {
+
+    if("<%= @address_user.latitude %>" == "0.0" && "<%= @address_user.longitude %>" == "0.0")
+    {
+      document.getElementById('remove-marker-link-new_map_location').click();
+      // alert('DOM is ready');
+    }
+  }
+</script>

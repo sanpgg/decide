@@ -1,0 +1,14 @@
+<%= form_for @user, :url => {:controller => "admin/users", :action => "update"} do |f| %>
+
+<h1><%= @user.born_names %> <%= @user.paternal_last_name %> <%= @user.maternal_last_name %></h1>
+
+<%= f.label "Sector actual" %>
+<%= @user.colonium.first.sector %>
+
+ <%= f.select :colonium, get_coloniums,:selected => @user.colonium.first.id, include_blank: "Seleccionar colonia",  :label => "Colonia" %>
+
+
+<div class="small-12 column margin-top">
+  <%= f.submit(class: "button", value: t("admin.budget_investments.edit.submit_button")) %>
+</div>
+<% end %>

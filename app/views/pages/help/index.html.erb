@@ -1,0 +1,84 @@
+<% provide :title do %><%= t("pages.titles.help", org: setting['org_name']) %><% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: help_url %>
+<% end %>
+
+<% if has_banners? %>
+  <%= render "shared/banner" %>
+<% end %>
+
+<div class="jumbo light">
+  <div class="row">
+    <div class="small-12 medium-9 column">
+      <h1>Decide San Pedro</h1>
+    </div>
+  </div>
+</div>
+
+<div id="more-info" class="more-info-content">
+  <div class="row">
+    <div class="small-12 medium-7 large-7 column">
+      <h1>Preguntas frecuentes</h1>
+      <p><%= t("pages.help.title", org: setting['org_name']) %></p>
+      <h3 id="requisitos" style="margin-bottom: 1rem;margin-top: 3rem;" data-magellan-target="budgets">
+        De los Requisitos
+      </h3>
+      <h4>¿Por qué tengo que subir fotos de mi INE?</h4>
+      <p>Para acreditar tu identidad, en conformidad con el artículo 8 del Reglamento vigente de participación y Atención Ciudadana de San Pedro .</p>
+      <h4>¿Por qué necesito un correo electrónico?</h4>
+      <p>Porque es la única forma de crear un usuario en la plataforma y registrar ideas y votar. Con el correo electrónico podemos comunicarnos contigo si necesitamos aclaraciones de tu idea, o para anunciarte los siguientes pasos en caso de que resulte ganadora.</p>
+      <h4>¿Quiénes pueden participar?</h4>
+      <p>Todas las personas que tengan identificación de San Pedro y vivan en San Pedro. </p>
+      <h4>¿Por qué no puedo proponer en más de una colonia o sector si tengo propiedades en más de una colonia o sector?</h4>
+      <p>El derecho de participación es de la persona (que solo puede votar una vez).  La persona propone y vota para mejorar la comunidad donde reside la mayor parte del tiempo.</p>
+
+      <h3 id="presupuestos" style="margin-bottom: 1rem;margin-top: 3rem;" data-magellan-target="budgets">
+        De los Presupuestos
+      </h3>
+      <h4>¿Puedo proponer donar el presupuesto de mi Junta de Vecinos o sector a otra Junta de Vecinos o sector?</h4>
+      <p>¡Claro que sí! La generosidad en nuestro municipio es muy importante.<br><br>Para ello cuando registres tu propuesta en tu Junta de Vecinos o tu sector, en el nombre de la propuesta o en la descripción describe por qué crees que es importante un proyecto en el sitio donde quieren donar este presupuesto. Si tus vecinos votan por tu propuesta, entonces habrás logrado donar su presupuesto.</p>
+      <h4>¿Puedo sumar presupuestos con otra colonia?</h4>
+      <p>¡Claro que sí! Para hacerlo, ponte de acuerdo con personas de otras Juntas de Vecinos y suban cada uno la misma propuesta. Esto hará que si ambas resultan ganadoras, los presupuestos de ambas Juntas de Vecinos irán al mismo proyecto ganador. </p>
+      <h4>¿Puedo sumar el presupuesto de mi Junta de Vecinos al presupuesto del año siguiente? </h4>
+      <p>No. Cada presupuesto corresponde a un año fiscal y no puede sumarse al año siguiente.</p>
+
+      <h3 id="seleccion" style="margin-bottom: 1rem;margin-top: 3rem;" data-magellan-target="budgets">
+        De la selección de propuestas
+      </h3>
+      <h4>¿Qué pasa si hay un empate?</h4>
+      <p>En caso de empate del proyecto de colonia organizaremos una asamblea con tus vecinas y vecinos para decidir.<br><br>En caso de empate de proyecto de sector, organizaremos un Consejo Sectorial con todas las y los presidentes de colonia para decidir.</p>
+      <h4>¿Puedo conocer la votación en tiempo real?</h4>
+      <p>No, la votación se dará a conocer al final de la etapa de votaciones.</p>
+      <h4>¿Qué se necesita para que una propuesta sea factible?</h4>
+      <p>Para que una propuesta sea factible debe cumplir con las siguientes:</p>
+      <ul>
+        <li><b>factibilidad económica:</b> que la propuesta se ajuste al presupuesto</li>
+        <li><b>factibilidad técnica:</b> que la propuesta pueda implementarse en el lugar propuesto</li>
+        <li><b>factibilidad jurídica:</b> que la propuesta no contravenga disposiciones legales</li>
+      </ul>
+      <h4>¿Qué pasa si ningún proyecto de mi colonia se determina como factible? ¿Qué pasa con el dinero de mi colonia?</h4>
+      <p>Cuando ningún proyecto se determina factible, tomamos las tres propuestas con el mayor número de comentarios y citamos a quienes las subieron, y con apoyo de las dependencias responsables, buscaremos ajustar los proyectos para que sean factibles y los mismos los puedan votar en la siguiente fase.</p>
+
+      <h3 id="registro" style="margin-bottom: 1rem;margin-top: 3rem;" data-magellan-target="budgets">
+        Del registro de propuestas
+      </h3>
+      <h4>¿Puedo proponer cosas fuera de este catálogo?</h4>
+      <p>Sí, durante la etapa de factibilidad evaluaremos si es viable o no someterla a votación.</p>
+      <h4>¿Puedo proponer proyectos por etapas?</h4>
+      <p>Depende de si la etapa es funcional por sí misma. No podemos hacer proyectos que queden incompletos. </p>
+      <h4>¿Cuántas propuestas puedo hacer? </h4>
+      <p>Solamente podrás subir una propuesta para colonia, y una para sector. Si tienes más ideas, promociona el programa con tus vecinos(as) y busca que la suban. </p>
+      <h4>¿Cuál es el rol de la mesa directiva en el presupuesto participativo? </h4>
+      <p>Las mesas directivas de las juntas de vecinos tienen un rol muy importante en este programa. Pueden convocar asambleas para que entre varias personas dialoguen sobre las necesidades principales de su entorno, definan prioridades y organicen recorridos para definir proyectos en conjunto entre varias colonias.</p>
+      <h4>¿Cómo determinaron los precios en el menú?</h4>
+      <p>Son costos promedio con base en el gasto del presupuesto participativo 2019 correspondiente a ese concepto. Es un costo estimado y puede variar cuando se haga la cotización actualizada de los proyectos ganadores, a partir del mes de Marzo de 2021.</p>
+      <h4>¿Qué pasa si nadie sube una propuesta en mi junta o sector?</h4>
+      <p>En caso de que ningún proyecto se proponga en la junta o sector, el monto asignado se reintegra al presupuesto Municipal.</p>
+    </div>
+    <div class="small-12 medium-4 large-4 column more-info-sidebar">
+      <%= render "pages/help/sidebar" %>
+    </div>
+  </div>
+
+
+</div>

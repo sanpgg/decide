@@ -1,0 +1,110 @@
+// Overrides and adds customized styles in this file
+// Read more on documentation:
+// * English: https://github.com/consul/consul/blob/master/CUSTOMIZE_EN.md#css
+// * Spanish: https://github.com/consul/consul/blob/master/CUSTOMIZE_ES.md#css
+//
+/*!
+/*!
+* Aquamarine Pingendo template (https://templates.pingendo.com)
+* Based on: Bootstrap v4.1.3 (https://getbootstrap.com)
+* Copyright 2014-2018 Pingendo (https://pingendo.com)
+*/
+
+@media screen and (min-width: 320px) and (max-width:580px) {
+  li.pagination-next {
+    display: inline;
+  }
+
+  li.pagination-previous {
+    display: inline;
+  }
+}
+
+.jumbo-budget {
+    background: none;
+    border-bottom: 0px !important;
+    background-image: url(https://i.imgur.com/amTJT5g.jpg);
+}
+
+input#residence_postal_code {
+    display: initial;
+}
+
+.expanded.budget .callout.primary a {
+    color: #584b3f;
+    color: #238a8a !important;
+}
+
+a {
+    color: cadetblue;
+}
+
+.callout.warning {
+      background-color: #d9edf7 !important;
+      border-color: #bce8f1 !important;
+      color: #31708f !important;
+}
+
+.callout.warning.margin-top a {
+    color: #338469 !important;
+}
+
+.callout.primary a {
+    color: #060606 !important;
+}
+
+.tabs .tabs-title>a[aria-selected='true'], .tabs .tabs-title>a.is-active {
+    border-bottom: 0;
+    color: #030806 !important;
+    font-weight: bold;
+}
+
+.color-author{
+  color: cadetblue !important;
+}
+
+.button.hollow, .button.hollow:hover, .button.hollow:focus {
+    background-color: #6b6e72;
+}
+
+.admin table th {
+    background: #2a2b2d;
+    color: #fff;
+}
+
+.submenu h2 {
+    font-size: 17px;
+    color: black;
+}
+
+.categories a, .geozone a {
+    background: #71bbc1;
+    color: #f9f9f9;
+    font-size: initial;
+}
+
+.more-info-content h3 {
+    color: #2a2b2d;
+}
+
+.expanded.budget {
+    background-image: url(https://i.imgur.com/amTJT5g.jpg);
+}
+
+.expanded.budget .info {
+    background: #0c666b59;
+}
+
+@media (min-width: 576px) {
+  .cover {
+    height: 356px; }
+  }
+@media (min-width: 768px) {
+  .cover {
+    height: 548px; } }
+@media (min-width: 992px) {
+  .cover {
+    height: 772px; } }
+@media (min-width: 1920px) {
+  .cover {
+    height: 980px; } }

@@ -1,0 +1,39 @@
+<style>
+
+  .warning {
+    color: red;
+  }
+
+</style>
+
+<h2><%= t("admin.users.index.title") %></h2>
+
+<div class="small-12 medium-6">
+  <%= form_tag admin_users_path, method: :get, remote: true  do %>
+    <div class="input-group">
+
+      <%= text_field_tag :search, '', placeholder: t('admin.users.search.placeholder') %>
+
+      <div class="input-group-button">
+        <%= submit_tag t('admin.users.search.search'), class: 'button' %>
+      </div>
+
+      <div class="" style="
+          margin-left: 10px;
+      ">
+
+          <%= link_to 'Generar Reporte', download_csv_admin_users_path(new_report: true) %>
+
+
+
+      </div>
+
+
+    </div>
+  <% end %>
+</div>
+
+
+<div id="users">
+  <%= render "users" %>
+</div>

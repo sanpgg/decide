@@ -1,0 +1,93 @@
+<div class="<%= results_type == :compatible ? 'success' : 'js-discarded' %>"
+     style="<%= results_type != :compatible ? 'display: none' : '' %>"
+     id="<%= results_type %>-container">
+
+  <h4><%= title %></h4>
+ 
+  <table id="budget-investments-<%= results_type %>" class="table-for-mobile id-<%=@budget.id%>">
+    <thead>
+      <tr>
+        <th scope="col">
+          <%= t("budgets.results.spending_proposal") %>
+        </th>
+         <th scope="col" class="text-center">
+          Decisiones en línea
+        </th>
+
+	  <th scope="col" class="text-center">Decide Fest</th>
+	  <th scope="col" class="text-center">Total</th>
+
+        <th scope="col" class="text-center">
+          <%= t("budgets.results.price") %>
+        </th>
+        <% if results_type == :compatible %>
+          <th scope="col" class="text-right">
+            <small><%= t("budgets.results.amount_available") %></small><br>
+            <%= @budget.formatted_amount(heading_price) %><br>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% amount_available = heading_price %>
+      <% investments.each do |investment| %>
+          <tr id="<%= dom_id(investment) %>"
+              class="budget-investments <%= investment.winner? ? 'success' : 'js-discarded' %>"
+              style="<%= investment.winner? ? '' : 'display: none' %>">
+            <td>
+              <% if investment.winner? %>
+                <span class="icon-check">
+                  <span class="show-for-sr">
+                    <%= t("budgets.results.accepted") %>
+                  </span>
+                </span>
+              <% else %>
+                <span class="icon-x delete">
+                  <span class="show-for-sr">
+                    <%= t("budgets.results.discarded") %>
+                  </span>
+                </span>
+              <% end %>
+              <%= link_to investment.title, budget_investment_path(@budget, investment) %>
+            
+            </td>
+	   <% if @budget.id < 10 %>
+      <td class="text-center">
+		    <% sql_k = "select count(*) from budget_ballot_lines where investment_id =#{investment.id}" %>
+		    <% result = ActiveRecord::Base.connection.execute(sql_k) %>
+        <% online = investment.ballot_online_count.present? ? investment.ballot_online_count : 0 %>
+        <% total = investment.ballot_lines_count.present? ? investment.ballot_lines_count : 0 %>
+		    <%= online %>
+
+		    <% offline = total == 0 ? 0 : total - Integer(result.getvalue(0,0)) %>
+      </td>
+
+      <td class="text-center"><%= offline %></td>
+      <td class="text-center"><%= online + offline %></td>
+
+    <% else %>
+
+      <td class="text-center">
+        <%= investment.ballot_online_count %>
+      </td>
+
+      <td class="text-center"><%= investment.ballot_offline_count %></td>
+
+	    <td class="text-center ballot"><%= investment.ballot_online_count + investment.ballot_offline_count %></td>
+    <% end %>
+    <td class="text-center">
+              <%= @budget.formatted_amount(investment.price) %>
+            </td>
+            <% if results_type == :compatible %>
+              <td class="small text-right"
+                  title="<%= @budget.formatted_amount(amount_available) %> - <%= @budget.formatted_amount(investment.price) %>">
+                  <%= @budget.formatted_amount(amount_available - investment.price) %>
+                  <% amount_available -= investment.price if investment.winner? %>
+              </td>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,7 @@
+<% provide :title do %><%= @process.title %><% end %>
+
+<%= render 'legislation/processes/header', process: @process, header: :full %>
+
+<%= render 'key_dates', process: @process, phase: :proposals %>
+
+<%= render 'proposals_content', process: @process, proposals: @proposals %>

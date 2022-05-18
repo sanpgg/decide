@@ -1,0 +1,610 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <meta id="ogimage" property="og:image" content="<%= root_url + ('voting_image.png') %>"/>
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>Decide San Pedro</title>
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="/portal/css/aquamarine.css">
+  <link rel="stylesheet" media="(max-width: 600px)" href="/portal/css/mobile.css" />
+  <script src="/portal/js/popper.min.js"></script>
+  <script src="/portal/js/bootstrap.min.js"></script>
+  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+  <!--script src="/portal/js/navbar-ontop.js"></script>
+  <!-- Script: Animated entrance -->
+  <script src="/portal/js/animate-in.js"></script>
+
+
+  <meta name="description" content="San Pedro Decide 2019 es la nueva plataforma del Programa de Presupuesto Participativo municipal, donde tú propones y decides qué proyectos se van a llevar a cabo en tu comunidad">
+  <meta name="keywords" content="decode san pedro garza participacion votacion gobierno presupuesto participativo">
+  <!-- CSS dependencies -->
+  <!-- link rel="stylesheet" href="/portal/css/aquamarine.css" -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <!-- Script: Make my navbar transparent when the document is scrolled to top -->
+  <script src="/portal/js/navbar-ontop.js"></script>
+  <!-- Script: Animated entrance -->
+  <script src="/portal/js/animate-in.js"></script>
+  <!--Carrousel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js"></script>
+  <script src="/portal/js/tworows.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/assets/owl.theme.default.min.css" type="text/css">
+  <link rel="stylesheet" href="/portal/css/owl.carousel.min.css" type="text/css">
+  <style>
+    body {
+      font-family: 'Arial' !important;
+    }
+    a:active,
+    a:visited,
+    a:focus {
+      color: white ;
+      outline: 0 !important;
+    }
+    footer p a, dropdown li a,
+    footer a, footer li a {
+      color: #606060 !important;
+    }
+    footer p a:hover, dropdown li a:hover,
+    footer a:hover, footer li a:hover {
+      color: #068400 !important;
+    }
+    #span {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      background: #068400;
+      border-radius: 20px;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+    .rounded-0 {
+    	display: inline-block;
+    	padding: .5rem 1.25rem;
+    	border-radius: 10rem;
+    	color: #fff;
+    	text-transform: uppercase;
+    	font-size: 1rem;
+    	letter-spacing: .15rem;
+    	transition: all .3s;
+    	position: relative;
+    	z-index: 1;
+      padding-left: 50px;
+      min-height: 40px;
+      max-height: 40px;
+      font-weight: normal;
+    }
+
+    .rounded-0:after {
+    	content: '';
+    	position: absolute;
+    	bottom: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    	background-color: #42B6B9;
+    	border-radius: 10rem;
+    	z-index: -2;
+    }
+
+    .rounded-0:before {
+    	content: '';
+    	position: absolute;
+    	bottom: 0;
+    	left: 0;
+    	width: 0%;
+    	height: 100%;
+    	background-color: #068400;
+    	transition: all .3s;
+    	border-radius: 20px;
+    	z-index: -1;
+    }
+    .rounded-0:hover {
+    	color: #fff;
+      text-decoration: none;
+    }
+    .rounded-0:hover:before {
+    	width: 100%;
+    }
+
+    img#logo-sp {
+      width: 300px;
+    }
+    img#municipio {
+      max-width: 12rem;
+    }
+    .navbar-ontop {
+      background-color: white !important;
+    }
+    a.nav-link {
+      color: currentColor;
+    }
+    .move-left {
+      float: left !important;
+    }
+    .move-right {
+      float: right;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: normal !important;
+        font-family: Arial !important;
+    }
+    a.btn.btn-outline-primary.mt-4 {
+      font-size: -webkit-xxx-large;
+      background: #00b3a3;
+      color: aliceblue;
+    }
+    #footer_2{
+      background: #e8e8e8;
+    }
+    .footer_img{
+      max-height: 50px !important;
+      max-width: 100% !important;
+      width: auto;
+      height: auto;
+    }
+    body{
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+      overflow-x: hidden;
+    }
+    .rowo{
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+    .bg-dark.aqua-fluid.py-3.pb-5.text-center {
+      background: #3c3c3a!important;
+    }
+    .col-md-9.col-lg-8.align-items-start.d-flex.ml-4 {
+      padding: 40px;
+    }
+    .mb-5.flex-center {
+      padding-top: 40px;
+    }
+    .owl-carousel .item {
+      height: 15rem;
+      padding: 1rem;
+      text-align: -webkit-left;
+    }
+    .owl-carousel .item h4 {
+      color: #FFF;
+      font-weight: 400;
+      margin-top: 1rem;
+    }
+    .owl-prev, .owl-next {
+      width: 15px;
+      height: 100px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block !important;
+      border:0px solid black;
+    }
+    .owl-prev { left: -20px; }
+    .owl-next { right: -20px; }
+    .owl-prev i, .owl-next i {transform : scale(2,5); color: #ccc;}
+    .center-table-element {
+      background: #ec7474;
+      width: 50%;
+      height: 25%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    #inside-box{
+      text-align: center;
+      vertical-align: middle;
+      line-height: 90px;
+      color: white;
+    }
+    h3.mb-0 {
+      height: 60px;
+    }
+    p.m-2.mx-5.text-center {
+      width: 100p;
+      color: white;
+    }
+    .owl-theme .owl-nav [class*=owl-] {
+      background: none;
+      margin: -10px;
+      color: #67bbc0;
+    }
+    .owl-theme .owl-nav [class*=owl-]:hover {
+      color: #67bbc0;
+      background: none;
+    }
+    i.fa.fa-angle-left {
+        font-size: x-large;
+    }
+
+    i.fa.fa-angle-right {
+        font-size: x-large;
+    }
+    .owl-prev i, .owl-next i {
+      transform: scale(2,5);
+      color: #67bbc0;
+    }
+    a.btn.btn-lg.mt-4.btn-outline-light {
+      background: white;
+      color: #55c8cb;
+      border-radius: inherit;
+      font-size: x-large;
+    }
+    .rounded-1 {
+    	display: inline-block;
+    	padding: .6rem 1.5rem;
+    	color: #fff;
+    	font-size: 1.2rem;
+    	letter-spacing: .15rem;
+    	transition: all .3s;
+    	position: relative;
+    	z-index: 1;
+      min-height: 50px;
+      max-height: 50px;
+      font-weight: bold;
+      background-color: #88c240;
+      -webkit-box-shadow: 12px 9px 5px 0px rgba(50, 50, 50, 1);
+      -moz-box-shadow:    12px 9px 5px 0px rgba(50, 50, 50, 1);
+      box-shadow:         12px 9px 5px 0px rgba(50, 50, 50, 1);
+    }
+    .rounded-1:hover {
+    	color: #fff;
+      text-decoration: none;
+      background-color: #068400;
+    }
+    .color-dark{
+      color: #3c3c3a;
+    }
+    .color-gray{
+      color: #606060;
+    }
+    .color-white {
+      color:white;
+    }
+    .bk-gray {
+      background: white !important;
+      background-color: white !important;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    .bk-gray
+    .mt-1 {
+      margin-top: 1rem !important;
+    }
+    .mt-2 {
+      margin-top: 2rem !important;
+    }
+    .mt-5 {
+      margin-top: 5rem !important;
+    }
+    .mb-4 {
+      margin-bottom: 4rem !important;
+    }
+    .font-bold {
+      font-weight: bold !important;
+    }
+    .lead {
+      font-size: 1.3rem;
+      font-weight: bold;
+      width: 50%;
+      margin: 0 auto !important;
+      text-align: center;
+      display: block;
+      margin-bottom: 4rem !important;
+    }
+    .fix-a {
+      font-size: 2rem;
+      min-height: 70px;
+      max-height: 70px;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    .circulo {
+      width: 150px;
+      height: 150px;
+      border-radius: 150px;
+      margin: 0 auto;
+      color: white;
+      font-size: 6rem;
+      margin-bottom: 1rem;
+    }
+    .bk-yellow {
+      background: #F4EA00;
+    }
+    .bk-pink {
+      background: #D659A0;
+    }
+    .bk-orange {
+      background: #F7991C;
+    }
+    #steps {
+      padding: 4rem;
+      margin: 4rem;
+    }
+    .container-back {
+      width: 100%;
+      height: 600px;
+    }
+    .bk-image {
+      background:transparent url('images/bk.png') no-repeat center center /cover;
+      width: 100%;
+      background-size: 60%;
+    }
+    .owl-carousel .item {
+      height: 25rem !important;
+    }
+    .colu {
+      min-height: 10rem !important;
+      text-align: center;
+      background: #606060;
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+    .div-center {
+      margin: 0 auto;
+      margin-bottom: 2rem;
+    }
+    .rounded-pink:after {
+      background: #D659A0 !important;
+    }
+    .bk-pinky,
+    .rounded-pink:before {
+      background: #A33D7C !important;
+    }
+    .rounded-oranges:after {
+      background: #F7991C !important;
+    }
+    .bk-oranges,
+    .rounded-oranges:before {
+      background: #C17214 !important;
+    }
+    .latest-blog-posts {
+       position: relative;
+    }
+    .pt60{
+      padding: 60px;
+      padding-top: 0px;
+    }
+    .thumbnail {
+      margin: 0 15px;
+      border: 0 !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      line-height: normal !important;
+    }
+    .customNavigation {
+      transform: translateY(-50%);
+      top: calc(50% - 37px);
+      position: absolute;
+      width: 100%;
+      left: 0;
+    }
+    .customNavigation>span {
+      transform: translateY(-50%);
+      top: 50%;
+      position: absolute;
+    }
+    .pager-left {
+      left: calc(0% + 15px);
+    }
+    .pager-right {
+      right: calc(0% + 15px);
+    }
+    .next, .prev {
+      font-size: 28px;
+      color: #ccc;
+    }
+    .next img, .prev img {
+      width: 30px;
+    }
+    .owl-nav.disabled {
+      display: none !important;
+    }
+    .title-banner {
+      display: inline-block;
+      padding: .6rem 1.5rem;
+      color: #fff;
+      font-size: 2rem;
+      transition: all .3s;
+      position: relative;
+      z-index: 1;
+      min-height: auto;
+      max-height: initial;
+      font-weight: bold;
+      background-color: #88c240;
+      -webkit-box-shadow: 12px 9px 5px 0px rgba(50, 50, 50, 1);
+      -moz-box-shadow: 12px 9px 5px 0px rgba(50, 50, 50, 1);
+      box-shadow: 12px 9px 5px 0px rgba(50, 50, 50, 1);
+      margin-bottom: 3rem;
+    }
+    .banner-item {
+      width: 50% !important;
+      margin: 0 auto !important;
+      margin-bottom: 3rem !important;
+    }
+    .item .rounded-0 {
+      text-align: left !important;
+      letter-spacing: 0 !important;
+      text-align: left !important;
+      text-transform: none !important;
+      margin-bottom: 2rem !important;
+    }
+    .notice-container {
+      z-index: 1;
+    }
+    #speakers h4 a {
+      color: white;
+    }
+    #speakers h4 a:hover{
+      color: whitesmoke !important;
+      text-decoration: none;
+    }
+    .top-bar .top-bar-title a img {
+      height: auto !important;
+    }
+    @media only screen and (max-width: 1024px) {
+      .bk-image {
+        background-size: 80% !important;
+      }
+    }
+    @media only screen and (max-width: 992px) {
+      .colu {
+        margin-bottom: 2rem !important;
+        flex: 0 0 46% !important;
+        max-width: 46% !important;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .bk-image {
+        background-size: 100% !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+      }
+      .container-back {
+        height: 400px !important;
+      }
+      img#logo-sp {
+        max-height: 50px;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+      }
+      a.nav-link {
+        color: black;
+        font-size: large;
+        padding: initial
+      }
+      .shady{
+        color: white !important;
+      }
+      #steps {
+        padding: 0px !important;
+        margin: 0px !important;
+      }
+      .lead {
+        width: 80% !important;
+      }
+      .not-show-mobile{
+        display: none;
+      }
+      .rounded-1 {
+        width: auto;
+        max-height: inherit !important;
+      }
+      .rounded-0{
+        display: block;
+        width: 100%;
+        margin: 20px auto;
+      }
+      .separador-bottom {
+        margin-bottom: 3rem !important;
+      }
+      .title-banner{
+        font-size: 1.3rem;
+      }
+      .pt60 {
+        padding: 0px;
+        padding-top: 0px;
+      }
+      .banner-item {
+        width: 80% !important;
+      }
+    }
+    @media only screen and (max-width: 600px) {
+        .colu {
+          margin:0 auto !important;
+          margin-bottom: 1rem !important;
+        }
+        img#logo-sp {
+          width: 300px !important;
+        }
+        .social .text-right {
+          text-align: left !important;
+        }
+    }
+    @media screen and (min-width: 320px) and (max-width:580px) {
+      h1#rowo-child {
+        font-size: 2rem !important;
+      }
+    }
+  </style>
+</head>
+<div class="text-center">
+  <div class="aqua-fluid py-3 pb-5" style="	height: 110px; background: white;">
+    <div class="container">
+      <div class="rowo">
+        <div class="col-md-12">
+          <div class="col-sm-6 move-left text-left">
+            <%= link_to root_path, accesskey: "0" do %>
+              <%= image_tag(image_path_for('decide.png'), id: 'logo-sp', alt: t("layouts.header.logo")) %>
+            <% end %>
+          </div>
+          <div class="col-sm-6 move-left not-show-mobile">
+            <%= image_tag(image_path_for('logo.svg'), id: 'municipio', class: 'float-right', alt: t("layouts.header.logo")) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav id="header" class="navbar navbar-expand-lg navbar-dark justify-content-between" style="float:right;display:none !important;">
+    <div>
+      <%= link_to content_tag(:div, "", id:"span", class:"bk-pinky")+'Ver presupuestos',
+                  budgets_path,
+                  { class: 'rounded-0 rounded-pink',
+                    rel: 'nofollow',
+                    style:'' } %>
+      <!-- Issue 261, flujo depende de muchas cosas -->
+       <%# si la fase es votacion, se hace el boton dinamico, sino, tiene la configuracion anterior %>
+      <% if current_budget&.phase == 'balloting' %>
+         <%# Si existe un usuario logeado %>
+          <% if current_user.present? %>
+            <%# Si el usuario esta verificado %>
+            <% if current_user.level_three_verified? %>
+              <%= link_to content_tag(:div, "", id:"span")+'Decide tus propuestas favoritas aquí',
+                          budget_ballot_path(current_budget),
+                          { class: 'rounded-0',
+                            rel: 'nofollow',
+                            style:'' } %>
+            <% else %>
+              <%= link_to content_tag(:div, "", id:"span")+'Verificar mi cuenta',
+                          verification_path(current_user),
+                          { class: 'rounded-0',
+                            rel: 'nofollow',
+                            style:'' } %>
+            <% end %>
+          <% else %>
+            <%= link_to content_tag(:div, "", id:"span")+'Ver Propuestas',
+                        investments_path,
+                        { class: 'rounded-0',
+                          rel: 'nofollow',
+                          style:'' } %>
+          <% end %>
+      <% else %>
+        <%= link_to content_tag(:div, "", id:"span")+'Ver Propuestas',
+                    investments_path,
+                    { class: 'rounded-0',
+                      rel: 'nofollow',
+                      style:'' } %>
+      <% end %>
+
+      <%= link_to content_tag(:div, "", id:"span", class:"bk-oranges")+t("devise_views.menu.login_items.login"),
+                  new_user_session_path,
+                  { class: 'rounded-0 shady rounded-oranges',
+                    rel: 'nofollow',
+                    style:'' } %>
+    </div>
+  </nav>
+</div>

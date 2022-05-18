@@ -1,0 +1,9 @@
+<%= form_for(@tag, :url => {:action => action }, as: :tag) do |f| %>
+  <div class="small-12 medium-6">
+    <%= f.label :name, t("admin.tags.name.placeholder") %>
+    <%= f.text_field :name, placeholder: t("admin.tags.name.placeholder"), label: false  %>
+    <%= f.cktext_area :description, maxlength: SpendingProposal.description_max_length, ckeditor: { language: I18n.locale }, label: false %>
+  </div>
+
+  <%= f.submit("#{@success_button}", class: "button success") %>
+<% end %>

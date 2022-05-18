@@ -1,0 +1,200 @@
+<style>
+  .top-bar,
+  header {
+    background: whitesmoke !important;
+  }
+  .logo-sp {
+    max-height: 50px;
+    max-width: 100%;
+    width: 300px !important;
+    height: auto;
+  }
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  a:active,
+  a:visited,
+  a:focus {
+    color: #606060 ;
+    outline: 0 !important;
+  }
+  footer p a, dropdown li a,
+  footer a, footer li a {
+    color: #606060 !important;
+  }
+  a:hover,
+  footer p a:hover, dropdown li a:hover,
+  footer a:hover, footer li a:hover {
+    color: #00CBD4 !important;
+  }
+  .subnavigation a:hover {
+    color: #EEE7E0 !important;
+  }
+  .budget-timeline .phase::before{
+    border: 3px solid #00CBD4;
+  }
+  .budget-timeline {
+    border-left: 3px solid #00CBD4;
+  }
+  .budget-timeline .phase.is-active::before,
+  .budget-timeline .phase.is-active h3 {
+    background: #00CBD4 !important;
+  }
+  .tags a, .tag-cloud a, .categories a, .geozone a, .sidebar-links a, .sidebar-map a,
+  #print_link,
+  .button.hollow {
+    border: 0 !important;
+    color: white !important;
+    background: #6C6E72 !important;
+  }
+  .tags a:hover, .tag-cloud a:hover, .categories a:hover, .geozone a:hover, .sidebar-links a:hover, .sidebar-map a:hover,
+  #print_link:hover,
+  .button.hollow:hover, .button.hollow:focus,
+  .button:hover, .button:focus {
+    background-color: #00CBD4 !important;
+    color: white !important;
+  }
+  .containertags li ul ol li {
+    list-style: circle !important;
+  }
+  .menu.vertical li a.is-active,
+  .categories a.is-active, .geozone a.is-active{
+    background: #EEE7E0 !important;
+    color: white !important;
+  }
+  .notice-container {
+    z-index: 1;
+  }
+  .top-bar .top-bar-title a img {
+    height: auto !important;
+  }
+  .top-bar {
+    color: black !important;
+  }
+  .menu-icon.dark:hover::after, .menu-icon.dark::after,
+  .menu-icon.dark::after {
+    background: black !important;
+    color: black !important;
+    box-shadow: 0 7px 0 black, 0 14px 0 black;
+  }
+  .expanded.budget {
+    background: white;
+  }
+  #budget-investments-main .highlight,
+  .expanded.budget {
+
+    width: 100%;
+    height: 14rem;
+    max-height: 14rem;
+
+  }
+  #sidebar .expanded.budget{
+    background: #ecf0f1 !important;
+    color: black !important;
+    min-height: 4rem;
+    max-height: 4rem;
+  }
+  #sidebar .expanded.budget:hover {
+    background: #068400 !important;
+    color: white !important;
+  }
+  .back {
+    color: black !important;
+  }
+  .back:hover {
+    color: #068400 !important;
+  }
+  .jumbo-budget h2, .jumbo-budget h3, .jumbo-budget .back, .jumbo-budget .icon-angle-left, .jumbo-budget p, .jumbo-budget a,
+  .jumbo-budget .icon-angle-left,
+  .jumbo-budget a,
+  .expanded.budget h1, .expanded.budget h2, .expanded.budget p, .expanded.budget a, .expanded.budget .back, .expanded.budget .icon-angle-left, .expanded.budget .description {
+    color: black;
+  }
+  .expanded.budget .info {
+    background: whitesmoke;
+  }
+  .expanded.budget p {
+    font-size: 1rem !important;
+  }
+  #budget-investments-main .highlight,
+  .jumbo-budget,
+  .jumbo.light {
+    background-image: none;
+    min-height: 14rem;
+    max-height: 14rem;
+
+    background-repeat: no-repeat;
+    width: 100%;
+    background-color: #00CBD4;
+  }
+  .top-bar .top-bar-title a img {
+    height: auto !important;
+  }
+  .js-follow,
+  .sidebar-title {
+    display:none !important;
+  }
+  .top-bar .menu > li .button {
+    background: #606060 !important;
+  }
+  @media only screen and (max-width: 640px) {
+    .subnavigation a {
+      color: black !important;
+    }
+    .subnavigation a:hover {
+      color: #068400 !important;
+    }
+    .mobile-resize {
+      height: 5rem;
+    }
+  }
+</style>
+<header>
+
+  <div class="row" style="padding-bottom: 1rem;padding-top: 1rem;">
+    <div class="top-bar">
+
+      <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="float-right">
+        <span class="menu-icon dark" data-toggle></span>
+        <%= t("application.menu")%>
+      </span>
+
+      <div class="top-bar-title">
+        <%= link_to root_path, accesskey: "0" do %>
+          <%= image_tag(image_path_for('decide.png'), class: 'float-left logo-sp', alt: t("layouts.header.logo")) %>
+        <% end %>
+      </div>
+
+      <div id="responsive-menu">
+        <div class="top-bar-right">
+          <ul class="menu" data-responsive-menu="medium-dropdown">
+            <%= render "shared/admin_login_items" %>
+            <%= render "layouts/notification_item" %>
+            <%= render "devise/menu/login_items" %>
+          </ul>
+
+          <div class="show-for-small-only">
+            <div class="subnavigation row">
+              <%= render "shared/subnavigation" %>
+              <div class="small-12 column">
+                <%= render "shared/top_links" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="navigation_bar" class="subnavigation expanded">
+    <div class="row">
+      <div class="hide-for-small-only">
+        <%= render "shared/subnavigation" %>
+      </div>
+      <div class="small-12 medium-3 column">
+        <%= yield :header_addon %>
+      </div>
+    </div>
+  </div>
+
+</header>

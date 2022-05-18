@@ -1,0 +1,13 @@
+<style>
+  .wrapper a,
+  .wrapper a:hover {
+    color: white !important;
+  }
+</style>
+<h2><%= t("devise_views.users.registrations.success.title") %></h2>
+<p><%= t("devise_views.users.registrations.success.thank_you_html") %></p>
+<p><%= t("devise_views.users.registrations.success.instructions_1_html") %></p>
+<p>
+  <%= link_to t("devise_views.users.registrations.success.back_to_index"),
+      root_path, class: "button margin-top expanded" %>
+</p>

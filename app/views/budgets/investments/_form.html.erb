@@ -1,0 +1,285 @@
+<style>
+  .button.hollow {
+    font-size: 1rem !important;
+  }
+  .checkbox a {
+    color: black !important!
+  }
+  .checkbox a:hover {
+    color: #068400 !important!
+  }
+  #category_tags ul li{
+    list-style: none;
+    border: none;
+  }
+  #containertags li ul ol li {
+    list-style: circle !important;
+    font-weight: lighter !important;
+  }
+  .p1,
+  #containertags li ul p b,
+  #containertags li ul p i,
+  #containertags li ul p,
+  #containertags li ul ol .p1 {
+    font-size: 1rem;
+  }
+  .tags a.actives {
+    background-color: #068400 !important;
+    color: white !important;
+  }
+  #category_tags ul p b {
+    font-style: initial !important;
+  }
+  #budget-investment-new .small-12 {
+    margin-bottom: 1rem;
+  }
+</style>
+<%= form_for(@investment, url: form_url, method: :post, html: { multipart: true }) do |f| %>
+  <%= render 'shared/errors', resource: @investment %>
+
+  <div class="row">
+    <div class="small-12 medium-12 column <%=current_user.sector.parameterize %>">
+      <%= f.select :heading_id, budget_heading_for_investments_select_options(@budget), {include_blank: true, } %>
+      <p id="price" class="help-text" style="font-size: 1.5rem;font-size: 1.5rem;background: #068400;color: white;max-width: max-content;padding-left: 10px;padding-right: 10px;font-weight: bold;"></p>
+
+      <% budget_heading_descriptions(@budget).each do |d| %>
+
+        <div id="<%= d[1] %>" class="descriptions">
+
+          <%= sanitize d[0] %>
+
+        </div>
+
+      <% end %>
+
+      <p class="help-text"><b>Recuerda que tu proyecto de sector debe de contar con comentarios de apoyo por parte de tres presidentes de Juntas de Vecinos de tu sector; antes del cierre de la etapa de propuestas (Mayo 1).<b/></p>
+
+    </div>
+    <div class="small-12 column">
+      <%= f.text_field :title, maxlength: SpendingProposal.title_max_length, data: { js_suggest_result: "js_suggest_result", js_suggest: "#js-suggest", js_url: suggest_budget_investments_path(@budget) }%>
+    </div>
+
+    <div class="small-12 column">
+      <!--
+      <%= f.label :tag_list, t("budgets.investments.form.tags_label") %>
+      <p class="help-text" id="tags-list-help-text"><%= t("budgets.investments.form.tags_instructions") %></p>
+      -->
+
+        <%= f.label :category_tag_list, "Escoge una de estas categorías y explora la lista de proyectos viables de esa categoría:" %>
+        <div id="category_tags-r" class="tags acordion">
+          <% @categories.each do |tag| %>
+            <a id="selectags" data-id="<%= tag.id %>" href="#<%= tag.id %>" class="js-add-investment-tag-link"><%= tag.name %></a>
+          <% end %>
+        <div id="category_tags" class="tags acordion">
+        <ul id="containertags">
+          <% @categories.each do |tag| %>
+            <li>
+              <ul id="<%= tag.id %>">
+                <%= sanitize tag.description %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      </div>
+      <%= f.text_field :tag_list, value: @investment.tag_list.to_s,
+                        label: false,
+                        readonly: true,
+                        placeholder: t("budgets.investments.form.tags_placeholder"),
+                        aria: {describedby: "tags-list-help-text"},
+                        class: 'js-tag-list tag-autocomplete',
+                        data: {js_url: suggest_tags_path} %>
+    </div>
+
+    <div id="js-suggest"></div>
+
+    <%= f.invisible_captcha :subtitle %>
+
+    <div class="ckeditor small-12 column">
+      <label for="budget_investment_description">Describe tu proyecto:</label>
+      <p class="help-text">
+        La descripción debe ser lo más específica posible. Recuerda que la información que nos des nos ayudará a evaluar la factibilidad de tu propuesta.
+      </p>
+      <%= f.cktext_area :description, maxlength: SpendingProposal.description_max_length, ckeditor: { language: I18n.locale }, label: false %>
+    </div>
+
+    <% if feature?(:map) %>
+      <div class="small-12 column">
+
+        <%= render 'map_locations/form_fields',
+                   form:     f,
+                   map_location: @investment.map_location || MapLocation.new,
+                   label:    "Señala la ubicación que tiene tu proyecto en el siguiente mapa:",
+                   help:     "",
+                   remove_marker_label: t("budgets.investments.form.map_remove_marker"),
+                   parent_class: "budget_investment",
+                   i18n_namespace: "budgets.investments" %>
+
+      </div>
+    <% end %>
+
+    <div class="small-12 column">
+      <%= f.label :location, t("budgets.investments.form.location") %>
+      <%= f.text_field :location, label: false %>
+    </div>
+
+    <% if feature?(:allow_images) %>
+      <div class="images small-12 column">
+        <%= render 'images/nested_image', imageable: @investment, f: f %>
+      </div>
+    <% end %>
+
+
+
+
+    <div class="small-12 column">
+      <%= link_to_add_association 'Añadir Imagen Adicional (opcional):', f, :additional_images, class: 'btn btn-primary', data: { association_insertion_node: '#dragon', association_insertion_method: :append} %>
+    </div>
+
+    <% if feature?(:allow_attached_documents) %>
+      <div class="documents small-12 column">
+        <%= render 'documents/nested_documents', documentable: @investment, f: f %>
+      </div>
+    <% end %>
+
+
+    <div class="small-12 column">
+      <span>Si estas proponiendo en nombre de una organización o grupo de personas, escribe su nombre:</span>
+      <%= f.text_field :organization_name, label: false %>
+    </div>
+
+    <div class="block margin_top">
+
+    <% unless current_user.manager? %>
+
+      <div class="small-12 column">
+        <%= f.label :terms_of_service do %>
+          <%= f.check_box :terms_of_service, title: t('form.accept_terms_title'), label: false, checked: true %>
+          <span class="checkbox">
+            Al registrarte aceptas las <a title=" (se abre en ventana nueva)" target="_blank" href="https://transparencia.sanpedro.gob.mx/documentosAvisosPrivacidad/ 5309/_2022328_80_Presupuesto Participativo Decide San Pedro.pdf">condiciones de uso</a>
+          </span>
+        <% end %>
+      </div>
+
+    <% end %>
+
+
+
+
+    <div class="actions small-12 medium-6 large-4 end column">
+      <%= f.submit(nil, class: "button expanded") %>
+    </div>
+  </div>
+<% end %>
+
+  <script>
+    $('#dragon').on('cocoon:after-insert', function() {
+      check_to_hide_or_show_add_link();
+    });
+
+    $('#dragon').on('cocoon:after-remove', function() {
+      check_to_hide_or_show_add_link();
+    });
+
+    check_to_hide_or_show_add_link();
+
+    function check_to_hide_or_show_add_link() {
+      if ($('#dragon .nested-fields').length == 4) {
+        $('a.btn.btn-primary.add_fields').hide();
+      } else {
+        $('#add-category a').show();
+      }
+    }
+  </script>
+  <script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  }
+  // A $( document ).ready() block.
+
+  $( document ).ready(function() {
+    // $("#budget_investment_heading_id").find('option').each(function() {
+    //   var texto = $(this).text();
+
+    //   if(texto.charAt(0)=="K"){
+    //     $(this).text(texto+" (Proyecto de sector)");
+    //   }else if(texto.charAt(0)==""){
+    //     $(this).text(texto);
+    //   }else{
+    //     $(this).text(texto+" (Proyecto de colonia)");
+    //   }
+
+
+    // });
+
+  $('#containertags ul').hide();
+  $('.sectoriales').hide();
+  $('.descriptions').hide();
+  $('#price').hide();
+  $('#budget_investment_heading_id').on('change', function() {
+    var prices = $(this).find(':selected').data('price');
+    var texto = this.options[this.selectedIndex].textContent;
+    var second = texto.charAt(0)+texto.charAt(1);
+
+    $('#price').show();
+    $('#price').html('');
+    var f = typeof prices;
+    if(f != "undefined"){
+      if(prices>=0){
+        var dinero = '$' + prices.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        $('#price').html('Presupuesto disponible: '+dinero);
+      }else{
+        $('#price').show();
+        $('#price').html('');
+      }
+    }else{
+      $('#price').show();
+      $('#price').html('');
+    }
+
+    let selected_heading_id = $("#budget_investment_heading_id option:selected").val();
+
+    $('.descriptions').hide();
+    $('#' + selected_heading_id).show();
+
+    if(texto.charAt(0)=="K"){
+      $('#'+second).show();
+      $('#category_tags-r').hide();
+      $('#budget_investment_tag_list').val("Proyectos sectoriales");
+    }else{
+      $('.sectoriales').hide();
+      $('#category_tags-r').show();
+      $('#budget_investment_tag_list').val("");
+    }
+  });
+   $( "#category_tags-r a" ).on( "click", function() {
+       var id = $(this).data("id");
+       console.log(id);
+       if($(this).hasClass('actives')){
+         $("#"+id).toggle();
+         $(this).removeClass("actives");
+       }else{
+         $('#containertags ul').hide();
+         $("#"+id).slideToggle();
+         $('#category_tags-r a').removeClass("actives");
+         $(this).addClass("actives");
+       }
+       //$('html, body').animate({
+      //   'scrollTop':   $("#"+id).offset().top - 200
+       //}, 2000);
+   });
+
+
+  });
+</script>

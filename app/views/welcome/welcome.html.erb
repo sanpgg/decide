@@ -1,0 +1,26 @@
+<style>
+  .user-permissions a:hover,
+  .user-permissions a{
+    color: white !important;
+  }
+</style>
+<h2>Comienza a participar</h2>
+
+<div class="user-permissions">
+  <p>
+    <span>
+      <strong>Sólo necesitas verificar tu identidad</strong>
+      y confirmar tu domicilio en San Pedro Garza García.
+    </span>
+  </p>
+  <% if current_user.level_three_verified? %>
+    <p class="already-verified">
+      <span class="icon-check"></span>
+      <%= t("account.show.verified_account") %>
+    </p>
+  <% else %>
+    <%= link_to(t("welcome.welcome.user_permission_verify_my_account"), verification_path, class: "button success radius expand") %>
+  <% end %>
+
+
+</div>

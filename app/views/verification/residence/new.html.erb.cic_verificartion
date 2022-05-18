@@ -1,0 +1,284 @@
+<style media="screen">
+    #status-area .flash_message {
+      padding: 5px;
+      color: green;
+  }
+  #error-mensaje .flash_message {
+    padding: 5px;
+    color: red;
+}
+div#error-mensaje {
+    color: red;
+    background: #f2dede;
+    color: #a94442;
+    display: inline-block;
+    margin: 0 0.375rem;
+}
+div#ine-exist {
+    background: #7bca7d;
+    color: #green;
+    display: inline-block;
+    margin: 0 0.375rem;
+}
+.file-input {
+  display: inline-block;
+  text-align: left;
+  background: #fff;
+  padding: 16px;
+  width: 450px;
+  position: relative;
+  border-radius: 3px;
+  padding-left: inherit;
+}
+.file-input > [type='file'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+  margin: initial;
+}
+.file-input > .button {
+  display: inline-block;
+  cursor: pointer;
+  background: #2e8e5d;
+  padding: 8px 16px;
+  border-radius: 2px;
+  margin-right: 8px;
+  margin-bottom: initial;
+}
+.file-input:hover > .button {
+  background: dodgerblue;
+  color: white;
+}
+.file-input > .label {
+  color: #000;
+  white-space: nowrap;
+  opacity: .7;
+  background: transparent;
+  font-size: initial;
+}
+.file-input.-chosen > .label {
+  opacity: 1;
+}
+
+.progress {
+    display: block !important;
+    text-align: center;
+    width: 0;
+    height: 10px !important;
+    background: #2e8e5d;
+    transition: width .4s;
+}
+.progress.hide {
+    transition: opacity 1.3s;
+}
+</style>
+
+<div class="verification account row">
+  <%track_event(category: "verification", action: "start_census" )%>
+  <div class="small-12 column">
+
+    <div class="text-center">
+      <div class="small-4 column verification-step is-active">
+        <span class="number">1</span> <%= t("verification.step_1") %>
+      </div>
+      <div class="small-4 column verification-step">
+        <span class="number">2</span> <%= t("verification.step_2_confirm_address") %>
+      </div>
+      <div class="small-4 column verification-step">
+        <span class="number">3</span> <%= t("verification.step_2_survey") %>
+      </div>
+    </div>
+
+    <div class="progress small-12 success">
+      <span class="meter" style="width: 33%"></span>
+    </div>
+
+    <%= back_link_to account_path, t("verification.back") %>
+
+    <h1><%= t("verification.residence.new.title") %></h1>
+
+    <div class="user-permissions small-12">
+      <p><%= t("verification.user_permission_info") %></p>
+
+      <ul>
+        <li><span class="icon-check"></span>&nbsp;Ver las propuestas que han subido tus vecinos(as)</li>
+        <li><span class="icon-check"></span>&nbsp;Registrar tus propuestas </li>
+        <li><span class="icon-check"></span>&nbsp;Comentar y compartir propuestas</li>
+        <li><span class="icon-check"></span>&nbsp;Votar por las propuestas que pasaron el examen de factibilidad</li>
+      </ul>
+    </div>
+
+    <%= form_for @residence, as: "residence", url: residence_path do |f| %>
+      <%= render "errors" %>
+
+
+      <div class="row">
+        <div class="small-12 medium-8">
+          <div class="small-12 medium-5 column end">
+              <% if @residence.errors.messages[:base].present? %>
+                <div id="error-mensaje">
+                  <%= @residence.errors.messages[:base].first %></div>
+              <% end %>
+              <div class="progress"></div>
+          </div>
+        </div>
+      </div>
+      <div id="status-area"></div>
+      <div class="row">
+        <div class="small-12 medium-8">
+          <div class="small-12 medium-5 column end">
+
+          <div class="inline-block">
+            <%= f.label t("verification.residence.new.document_number") %>
+          </div>
+
+          <div class="inline-block" data-toggle="info-document-number">
+            <span class="show-for-sr"><%= t("verification.residence.new.document_number_help_title") %></span>
+          </div>
+
+          <div class="dropdown-pane" id="info-document-number" data-dropdown
+               data-hover="true" data-hover-pane="true">
+            <%= t("verification.residence.new.document_number_help_text_html") %>
+          </div>
+
+          <%= f.text_field :document_number, label: false %>
+
+          <p style="font-size: small;line-height: unset;font-weight: bold;"> El numero se encuentra en el reverso de tu credencial para votar.
+          </p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="date-of-birth small-12 medium-6 clear">
+      <%= f.label t("verification.residence.new.date_of_birth") %>
+      <%= f.date_select :date_of_birth,
+                        prompt: true,
+                        start_year: 16.years.ago.year, end_year: 1900,
+                        label: false %>
+      </div>
+
+      <div class="small-12 medium-5 clear">
+      </div>
+
+      <div class="small-12">
+        <%= f.label :terms_of_service do %>
+          <%= f.check_box :terms_of_service, title: t('verification.residence.new.accept_terms_text_title'), label: false %>
+          <span class="checkbox">
+            <%= t("verification.residence.new.accept_terms_text",
+                terms_url: link_to(t("verification.residence.new.terms"), "/census_terms",
+                title: t('shared.target_blank_html'),
+                target: "_blank")).html_safe
+            %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="small-12 medium-3 clear">
+        <%= f.submit t("verification.residence.new.verify_residence"),
+                     id: "new_residence_submit",
+                     class: "button success expanded" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  (function($) {
+    $.fn.flash_message = function(options) {
+      options = $.extend({
+        text: 'Done',
+        time: 10000000000000000000000,
+        how: 'before',
+        class_name: ''
+      }, options);
+      return $(this).each(function() {
+        if( $(this).parent().find('.flash_message').get(0) )
+          return;
+        var message = $('<span />', {
+          'class': 'flash_message ' + options.class_name,
+          text: options.text
+        });
+        $(this)[options.how](message);
+      });
+    };
+})(jQuery);
+  $('#image').change(function(){
+     var formData = new FormData(),
+         $input = $(this);
+     formData.append('image[image]', $input[0].files[0]);
+     formData.append('user_id',<%= current_user.id %>);
+
+
+
+     var data = [];
+for (var i = 0; i < 100000; i++) {
+    var tmp = [];
+    for (var i = 0; i < 100000; i++) {
+        tmp[i] = 'hue';
+    }
+    data[i] = tmp;
+};
+$.ajax({
+    xhr: function () {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                console.log(percentComplete);
+                $('.progress').css({
+                    width: percentComplete * 100 + '%'
+                });
+                if (percentComplete === 1) {
+                    $('.progress').addClass('hide');
+                }
+            }
+        }, false);
+        xhr.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                console.log(percentComplete);
+                $('.progress').css({
+                    width: percentComplete * 100 + '%'
+                });
+            }
+        }, false);
+        return xhr;
+    },
+    url: '<%= image_upload_path %>',
+    data: formData,
+    type: 'PUT',
+    cache:false,
+    contentType: false,
+    processData: false,
+    success: function(data){
+      $('#status-area').flash_message({
+        text: 'Se agrego la INE con exito',
+        how: 'append'
+      });
+    }
+
+});
+   })
+   // Also see: https://www.quirksmode.org/dom/inputfile.html
+var inputs = document.querySelectorAll('.file-input')
+for (var i = 0, len = inputs.length; i < len; i++) {
+  customInput(inputs[i])
+}
+function customInput (el) {
+  const fileInput = el.querySelector('[type="file"]')
+  const label = el.querySelector('[data-js-label]')
+  fileInput.onchange =
+  fileInput.onmouseout = function () {
+    if (!fileInput.value) return
+    var value = fileInput.value.replace(/^.*[\\\/]/, '')
+    el.className += ' -chosen'
+    label.innerText = value
+  }
+}
+</script>
