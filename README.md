@@ -42,8 +42,8 @@ bin/rake db:dev_seed
 RAILS_ENV=test rake db:setup
 ```
 
-# Cargar Presupuesto para cada año 
-Prerequisites:
+# Configuración adicional para cargar presupuesto para cada ejercicio 
+Pre requisitos:
   - Archivo `junta_vecinal_2020.csv` que la gente del municipio proporciona una vez listo
   - El archivo debe estar en `db/junta_vecinal_2020.csv` 
   - El elemento Budget con nombre `Presupuesto Participativo 2020` debe existir en la base de datos, se puede crear desde el admin de la aplicacion
