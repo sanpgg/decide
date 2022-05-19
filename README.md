@@ -42,7 +42,7 @@ bin/rake db:dev_seed
 RAILS_ENV=test rake db:setup
 ```
 
-# Configuración adicional para cargar presupuesto para cada ejercicio 
+## Configuración adicional para cargar presupuesto para cada ejercicio 
 Pre requisitos:
   - Archivo `junta_vecinal_2020.csv` que la gente del municipio proporciona una vez listo
   - El archivo debe estar en `db/junta_vecinal_2020.csv` 
