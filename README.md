@@ -42,7 +42,7 @@ bin/rake db:dev_seed
 RAILS_ENV=test rake db:setup
 ```
 
-# Cargar Presupuesto 2020 
+# Cargar Presupuesto para cada año 
 Prerequisites:
   - Archivo `junta_vecinal_2020.csv` que la gente del municipio proporciona una vez listo
   - El archivo debe estar en `db/junta_vecinal_2020.csv` 
@@ -50,6 +50,7 @@ Prerequisites:
   - Una vez que se tenga los presupuestos para cada sector (K1..K6) actualizar el archivo `db/seeds/presupuesto_2020.seeds.rb` 
   - Correr el script en la consola `rake db:seed:single SEED=presupuesto_2020` 
   - Si todo corrió correctamente debería verse algo similar a esto
+  
 ![Resultado de Script](https://i.imgur.com/FqILoqg.png?1)
 
 Configurar las Api Keys, correos, dominios y demás propiedades en los archivos correspondientes:
