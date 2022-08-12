@@ -125,7 +125,7 @@
 
     background-repeat: no-repeat;
     width: 100%;
-    background-color: #00CBD4;
+    background-color: whitesmoke;
   }
   .top-bar .top-bar-title a img {
     height: auto !important;
@@ -148,6 +148,69 @@
       height: 5rem;
     }
   }
+  .ssb-facebook {
+    background: #3b5998;
+    background-image: none !important;
+    color: #fff;
+    height: 3rem !important;
+    position: relative;
+    width: 3rem !important;
+  }
+  .ssb-whatsapp_web {
+    background: lawngreen;
+    background-image: none !important;
+    color: #fff;
+    height: 3rem !important;
+    position: relative;
+    width: 3rem !important;
+  }
+  .ssb-instagram {
+    background: orangered;
+    background-image: none !important;
+    color: #fff;
+    height: 3rem !important;
+    position: relative;
+    width: 3rem !important;
+  }
+
+  .ssb-instagram::before{
+    content: '2';
+      font-family: "icons" !important;
+      font-size: 1.5rem;
+      left: 50%;
+      line-height: 3rem;
+      margin-left: -0.6875rem;
+      position: absolute;
+      top: 0;
+      }
+  .ssb-whatsapp_web::before{
+      content: 'P';
+        font-family: "icons" !important;
+        font-size: 1.5rem;
+        left: 50%;
+        line-height: 3rem;
+        margin-left: -0.6875rem;
+        position: absolute;
+        top: 0;
+        }
+  .ssb-facebook::before {
+    content: 'A';
+    font-family: "icons" !important;
+    font-size: 1.5rem;
+    left: 50%;
+    line-height: 3rem;
+    margin-left: -0.6875rem;
+    position: absolute;
+    top: 0;
+  }
+  .ssb-whatsapp_web:hover, .ssb-whatsapp_web:focus {
+    background: #fff;
+    color: lawngreen;
+  }
+  .ssb-instagram:hover, .ssb-whatsapp_web:focus {
+      background: #fff;
+      color: orangered;
+    }
 </style>
 <header>
 

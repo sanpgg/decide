@@ -11,6 +11,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+
+    imported = User.find_by(username: "imported_#{params[:user][:email]}")
+
+    return redirect_to new_user_registration_path, alert: "Tus datos ya fueron registrados en el Decide Fest el 17 de Julio del 2022, si piensas que esto fue un error comunicate a atención Ciudadana al 81 12 12 12 12. ¡Recuerdas que solo puedes votar en una modalidad!" if imported.present?
+
     build_resource(sign_up_params)
     if resource.valid?
       super

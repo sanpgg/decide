@@ -26,6 +26,8 @@ class Budget
     include Flaggable
     include Milestoneable
 
+    include PgSearch
+
     belongs_to :author, -> { with_hidden }, class_name: 'User', foreign_key: 'author_id'
     belongs_to :heading
     belongs_to :group
@@ -62,19 +64,21 @@ class Budget
     validate :limiter_conlonia_proposals, on: :create
 
     scope :sort_by_confidence_score,    -> { reorder(confidence_score: :desc, id: :desc) }
-    scope :sort_by_ballots,             -> { reorder(ballot_lines_count: :desc, id: :desc) }
+    scope :sort_by_ballots,             -> { reorder('ballot_lines_count + ballot_offline_count DESC, id DESC') }
     scope :sort_by_price,               -> { reorder(price: :desc, confidence_score: :desc, id: :desc) }
     scope :sort_by_random,              ->(seed) { reorder("budget_investments.id % #{seed.to_f.nonzero? ? seed.to_f : 1}, budget_investments.id") }
     scope :sort_by_hot_score,           -> { reorder(hot_score: :desc) }
     scope :sort_by_id,                  -> { order("id DESC") }
     scope :sort_by_title,               -> { order("title ASC") }
-    scope :sort_by_supports,            -> { order("cached_votes_up DESC") }
+    #scope :sort_by_supports,            -> { order("cached_votes_up DESC") }
+    scope :sort_by_supports,            -> { order('ballot_lines_count + ballot_offline_count DESC, id DESC') }
     scope :sort_by_flags,               -> { order(flags_count: :desc, updated_at: :desc) }
     scope :sort_by_created_at,          -> { reorder(created_at: :desc) }
     scope :sort_by_most_commented,      -> { reorder(comments_count: :desc) }
     scope :sort_by_winners,             -> { winners }
     scope :sort_by_no_winners,          -> { no_winners }
     scope :sort_by_unfeasible,          -> { unfeasible }
+    scope :manual_search,               -> (terms) { where("id LIKE ? OR title LIKE ? OR description LIKE ? OR location LIKE ?", "%#{terms}%", "%#{terms}%", "%#{terms}%", "%#{terms}%") }
 
     scope :valuation_open,              -> { where(valuation_finished: false) }
     scope :without_admin,               -> { valuation_open.where(administrator_id: nil) }
@@ -114,12 +118,25 @@ class Budget
     before_validation :set_responsible_name
     before_validation :set_denormalized_ids
 
+    pg_search_scope :ssearch,
+    against: {
+      id: 'A',
+      title: 'B',
+      description: 'C',
+      location: 'D'
+    },
+    using: {
+      tsearch: { prefix: true, dictionary: "spanish" }
+    }
+
+
     def comments_count
       comments.count
     end
 
     def ballot_online_count
       Budget::Ballot::Line.counter(id)
+      # self.ballot_lines_count
     end
 
     def url
@@ -132,6 +149,7 @@ class Budget
 
     def self.scoped_filter(params, current_filter)
       budget  = Budget.find_by(slug: params[:budget_id]) || Budget.find_by(id: params[:budget_id])
+
       results = Investment.by_budget(budget)
 
       results = results.where("cached_votes_up + physical_votes >= ?",
@@ -185,16 +203,19 @@ class Budget
     end
 
     def searchable_values
-      { title              => 'A',
-        author.username    => 'B',
-        heading.try(:name) => 'B',
-        tag_list.join(' ') => 'B',
-        description        => 'C'
+      {
+        title               => 'A',
+        id                  => 'A',
+        author.username     => 'B',
+        heading.try(:name)  => 'B',
+        tag_list.join(' ')  => 'B',
+        description         => 'C'
       }
     end
 
     def self.search(terms)
-      pg_search(terms)
+      #pg_search(terms)
+      ssearch(terms)
     end
 
     def self.by_heading(heading)
@@ -349,11 +370,17 @@ class Budget
     end
 
     def self.apply_filters_and_search(_budget, params, current_filter = nil)
+      
       investments = all
-      investments = investments.send(current_filter)             if current_filter.present?
+
+      #investments = investments.send(current_filter)             if current_filter.present?
+
       investments = investments.by_heading(params[:heading_id])  if params[:heading_id].present?
+
       investments = investments.search(params[:search])          if params[:search].present?
+      
       investments = investments.filter(params[:advanced_search]) if params[:advanced_search].present?
+
       investments
     end
 

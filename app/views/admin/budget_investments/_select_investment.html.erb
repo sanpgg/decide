@@ -14,7 +14,7 @@
     <% sql_k = "select count(*) from budget_ballot_lines where investment_id =#{investment.id}" %>
     <% result = ActiveRecord::Base.connection.execute(sql_k) %>
     <% online = investment.ballot_online_count.present? ? investment.ballot_online_count : 0 %>
-    <% total = investment.ballot_lines_count.present? ? investment.ballot_lines_count : 0 %>
+    <% total = investment.ballot_online_count.present? ? investment.ballot_online_count : 0 %>
     <%= online %>
 
     <% offline = total == 0 ? 0 : total - Integer(result.getvalue(0,0)) %>
@@ -25,13 +25,13 @@
 
     <% else %>
       <td class="text-center">
-        <%= investment.ballot_lines_count %>
+        <%= investment.ballot_online_count %>
       </td>
       <td class="text-center">
         <%= investment.ballot_offline_count %>
       </td>
       <td class="text-center">
-        <%= investment.ballot_lines_count + investment.ballot_offline_count %>
+        <%= investment.ballot_online_count + investment.ballot_offline_count %>
       </td>
     <% end %>
 

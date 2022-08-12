@@ -7,7 +7,7 @@
 		padding-left: 2px;
 		border-radius: 10px;
 		padding-left: 10px;
-		padding-right: 10px;	
+		padding-right: 10px;
 	}
 	.botonr:hover {
 		background: #A33D7C !important;
@@ -16,7 +16,7 @@
 </style>
 <div class="expanded budget no-margin-top padding">
   <div class="row">
-    <%= back_link_to @ballot_referer %>
+    <%= back_link_to budgets_path %>
 
     <h1 class="text-center"><%= t("budgets.ballots.show.title") %></h1>
 
@@ -70,35 +70,34 @@
   <% end %>
 
   <% no_balloted_groups = @budget.groups.order(name: :asc) - ballot_groups %>
-  <% no_balloted_groups.each do |group| %>
+
+  <% no_balloted_groups.each do | group | %>
     <div id="<%= dom_id(group) %>" class="small-12 medium-6 column end">
-	
-	<% cu_current_budget = Budget.current.id %>
-	<% sectores = Budget::Group.where(budget_id: cu_current_budget).sectores %> 
-	<% colonias = Budget::Group.where(budget_id: cu_current_budget).colonia %>
 
       <div class="margin-top ballot-content">
         <div class="subtitle <%=group%> ">
           <h3>
             <%= group.name %>
           </h3>
-	<% if current_user.level_two_and_three_verified? %>
-         <% colonia_id = Budget::Heading.find_by(slug: current_user.junta_vecinal.parameterize, group_id: 16) %>
-	<% colonia_id2 = Budget::Heading.find_by(name: current_user.colonium.try(:first).try(:junta_nom), group_id: 16) %>
-	 <% sector_id = Budget::Heading.find_by(slug: current_user.sector.parameterize, group_id: 15) %>
 
-	  <% if group.name == "Juntas Vecinales" %>
-            <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_investments_path(@budget, heading_id: colonia_id2 ), class: "botonr" %>
-          <% elsif group.name == "Sectores" %>
-            <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_investments_path(@budget, heading_id: sector_id ), class: "botonr" %>
+          <% if current_user.level_two_and_three_verified? %>
+
+            <% colonia_id = Budget::Heading.find_by(suburb_id: current_user.colonium.first.id, group_id: group.id) %>
+            <% sector_id = Budget::Heading.find_by(sector: current_user.sector.parameterize.upcase, group_id: group.id) %>
+
+            <% if group.name == "Juntas Vecinales" %>
+              <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_investments_path(@budget, heading_id: colonia_id), class: "botonr" %>
+            <% elsif group.name == "Sectores" %>
+              <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_investments_path(@budget, heading_id: sector_id), class: "botonr" %>
+            <% else %>
+              <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_group_path(@budget, group), class: "botonr" %>
+            <% end %>
+
           <% else %>
-            <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_group_path(@budget, group), class: "botonr" %>
+            <div class="callout warning">
+            <%= t("legislation.proposals.not_verified",verify_account: link_to(t("votes.verify_account"), verification_path )).html_safe %>
+            </div>
           <% end %>
-	<% else %>
-		<div class="callout warning">
-		<%= t("legislation.proposals.not_verified",verify_account: link_to(t("votes.verify_account"), verification_path )).html_safe %>
-		</div>
-	<% end %>
         </div>
       </div>
     </div>

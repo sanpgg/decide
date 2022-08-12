@@ -38,7 +38,7 @@ class Verification::ResidenceController < ApplicationController
   end
 
   def is_valid_image
-    if residence_params[:ife].headers.include?(".jfif")
+    if residence_params[:ife]&.headers&.include?(".jfif")
       redirect_to new_residence_path, flash: { error: "Formato de imagen no válido. Intenta con otra." }
     end
   end

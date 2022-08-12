@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   scope :by_authors,     ->(author_ids) { where("users.id IN (?)", author_ids) }
   scope :by_username_email_or_document_number, ->(search_string) do
     string = "%#{search_string}%"
-    where("username ILIKE ? OR email ILIKE ? OR document_number ILIKE ? OR curp ILIKE ?", string, string, string, string)
+    where("username ILIKE ? OR email ILIKE ? OR document_number ILIKE ? OR curp ILIKE ?", string, string, string, string).active
   end
 
   before_validation :clean_document_number
@@ -224,6 +224,11 @@ class User < ActiveRecord::Base
   end
 
   def erase(erase_reason = nil)
+
+    self.ballots.each do |ballot|
+      ballot.remove
+    end
+
     update(
       erased_at: Time.current,
       erase_reason: erase_reason,
@@ -236,9 +241,35 @@ class User < ActiveRecord::Base
       reset_password_token: nil,
       email_verification_token: nil,
       confirmed_phone: nil,
-      unconfirmed_phone: nil
+      unconfirmed_phone: nil,
+      curp: nil
     )
     identities.destroy_all
+  end
+
+  def erase_from_admin(erase_reason = nil)
+    
+    # remove_ballots
+
+    self.ballots.each do |ballot|
+      ballot.remove
+    end
+    
+    update(
+      erased_at: Time.current,
+      erase_reason: erase_reason,
+      username: nil,
+      email: nil,
+      unconfirmed_email: nil,
+      phone_number: nil,
+      encrypted_password: "",
+      confirmation_token: nil,
+      reset_password_token: nil,
+      email_verification_token: nil,
+      confirmed_phone: nil,
+      unconfirmed_phone: nil,
+      curp: nil
+    )
   end
 
   def erased?

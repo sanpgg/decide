@@ -28,7 +28,7 @@ module SearchCache
   end
 
   def strip_html(value)
-    ActionController::Base.helpers.sanitize(value, tags: [])
+    ActionController::Base.helpers.sanitize(value, tags: []) if value.is_a? String
   end
 
 end

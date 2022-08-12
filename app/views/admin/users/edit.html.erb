@@ -10,5 +10,6 @@
 
 <div class="small-12 column margin-top">
   <%= f.submit(class: "button", value: t("admin.budget_investments.edit.submit_button")) %>
+  <%= link_to "Dar de baja", admin_user_unsubscribe_user_path(@user.id), method: :post, class: 'delete' %>
 </div>
 <% end %>

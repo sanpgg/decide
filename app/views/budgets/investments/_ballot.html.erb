@@ -27,10 +27,10 @@
         <%= investment.formatted_price %>
 
         <!-- Filter for votes -->
-      
+
         <% if current_user.present? %>
           <% if investment.group.name == "Juntas Vecinales" %>
-            <% @result = investment.heading.name == current_user.colonium.try(:first).try(:junta_nom) %>
+            <% @result = investment.heading.suburb_id == current_user.colonium.first.id %>
           <% elsif investment.group.name == "Sectores" %>
             <% @result = investment.heading.sector.try(:downcase) == current_user.colonium.try(:first).try(:sector).try(:downcase) %>
           <% end %>
@@ -41,7 +41,7 @@
         <%= link_to t("budgets.investments.investment.add"),
                     budget_ballot_lines_url(investment_id: investment.id,
                                             budget_id: investment.budget_id,
-                                            investments_ids: investment_ids),
+                                            investments_ids: investment_ids).gsub("http://127.0.0.1:3000", ""),
                     class: "button button-support small expanded",
                     title: t('budgets.investments.investment.support_title'),
                     method: :post,

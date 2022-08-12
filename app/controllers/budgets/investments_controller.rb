@@ -36,6 +36,9 @@ module Budgets
     respond_to :html, :js
 
     def index
+
+      @pagination_section = 15
+
       all_investments = if @budget.finished?
                           if params[:filter] == "unfeasible"
                             investments.unfeasible
@@ -47,14 +50,21 @@ module Budgets
                             if params[:filter] == "unfeasible"
                               investments.unfeasible
                             else
-                              investments.valuation_finished_feasible
+                              if params[:search].present?
+                                investments
+                              else
+                                investments.valuation_finished_feasible
+                              end
                             end
                           else
                             investments
                           end
                         end
+
+      @all_investments_count = all_investments.count
+
       @investments = all_investments.page(params[:page])
-                                    .per(10)
+                                    .per(@pagination_section)
                                     .includes(:tags, :author, :image)
                                     .for_render
 

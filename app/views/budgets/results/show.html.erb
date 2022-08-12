@@ -43,9 +43,8 @@
     </h3>
     <ul class="menu vertical no-margin-top no-padding-top">
 
-
-      <% @budget.headings.order('group_id, sector, name').each do |heading| %>
-        <% if  heading.group.name == 'Sectores' %>
+      <% @budget.headings.joins("LEFT JOIN colonia c ON c.id = budget_headings.suburb_id").order('group_id DESC, c.sector, name').each do |heading| %>
+        <% if  heading.htype == "sector" %>
           <li>
             <%= link_to heading.name,
                         budget_results_path(@budget, heading_id: heading.to_param),
@@ -53,7 +52,7 @@
           </li>
         <% else %>
         <li>
-          <%= link_to "#{heading.sector} - #{heading.name}",
+          <%= link_to "#{Colonium.find_by(id: heading.suburb_id)&.sector} - #{heading.name}",
                       budget_results_path(@budget, heading_id: heading.to_param),
                       class: heading.to_param == @heading.to_param ? 'is-active' : '' %>
         </li>

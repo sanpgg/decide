@@ -89,6 +89,7 @@ class Admin::BudgetInvestmentsController < Admin::BaseController
             .permit(:title, :description, :external_url, :heading_id, :administrator_id, :tag_list, :ballot_offline_count,
                     :valuation_tag_list, :incompatible, :visible_to_valuators, :selected,
                     valuator_ids: [], valuator_group_ids: [],
+                    image_attributes: [:id, :title, :attachment, :cached_attachment, :user_id, :_destroy],
                     documents_attributes: [:id, :title, :attachment, :cached_attachment, :user_id, :_destroy])
     end
 

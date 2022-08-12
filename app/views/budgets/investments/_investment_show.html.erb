@@ -1,4 +1,9 @@
 <style media="screen">
+
+  .pwrap {
+    white-space: pre-wrap;
+  }
+
 @media only screen and (min-width: 959px) {
     .img {
         max-width: 50%;
@@ -56,7 +61,7 @@ display: block;
             og_image_url: (investment.image.present? ? investment.image_url(:thumb) : nil) %>
 <% end %>
 
-<% cache [locale_and_user_status(investment),
+<%# cache [locale_and_user_status(investment),
           investment,
           investment.author,
           Flag.flagged?(current_user, investment),
@@ -65,7 +70,7 @@ display: block;
 
     <div class="row">
       <div class="small-12 medium-9 column">
-        <%= back_link_to budgets_path %>
+        <%= back_link_to url_for(:back) %>
 
         <h1><%= investment.title %></h1>
         <div class="budget-investment-info">
@@ -111,6 +116,13 @@ display: block;
           </div>
         <% end %>
 
+        <% if investment.should_show_price_explanation? %>
+          <h2 id="price_explanation" data-magellan-target="price_explanation" style="background: green;color: white;">
+           Información relevante sobre la factibilidad de esta propuesta
+          </h2>
+          <p class="pwrap"><%= investment.price_explanation %></p>
+        <% end %>
+
         <% if feature?(:map) && map_location_available?(@investment.map_location) %>
           <div class="margin">
             <%= render_map(@investment.map_location, "budget_investment", false, nil) %>
@@ -148,13 +160,7 @@ display: block;
           <p><%= investment.unfeasibility_explanation %></p>
         <% end %>
 
-        <% if investment.should_show_price_explanation? %>
-          <h2 id="price_explanation" data-magellan-target="price_explanation" style="background: green;color: white;">
-           Información importante del costo
-          </h2>
-          <p><%= investment.price_explanation %></p>
-        <% end %>
-
+     
         <%= render 'relationable/related_content', relationable: @investment %>
 
         <div class="js-moderator-investment-actions margin">
@@ -245,6 +251,7 @@ display: block;
         <% if investment.should_show_price? %>
           <div style="display:none" class="sidebar-divider"></div>
           <h2><%= t("budgets.investments.show.price") %></h2>
+          <p style="font-size: 1rem !important;">El costo final lo sabremos en caso de resultar ganador, con un anexo técnico y cotización detallada y actualizada.</p>
           <div class="supports text-center">
             <p class="investment-project-amount">
               <%= investment.formatted_price %>
@@ -252,7 +259,7 @@ display: block;
           </div>
           <% if investment.should_show_price_explanation? %>
             <div class="text-center" data-magellan>
-              <%= link_to t("Ver información importante sobre este costo"),
+              <%= link_to t("Información relevante sobre la factibilidad de esta propuesta"),
                             "#price_explanation", class: "small" %>
             </div>
           <% end %>
@@ -276,7 +283,7 @@ display: block;
        </aside>
     </div>
   </section>
-<% end %>
+<%# end %>
 
 <script type="text/javascript">
        $('.flexslider').flexslider({

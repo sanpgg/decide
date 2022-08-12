@@ -45,9 +45,8 @@ class Verification::AddressUsersController < ApplicationController
 
   def update
     @address_user = AddressUser.find_by(id: user_address_params[:id])
+
     if @address_user.update(user_address_params)
-      # TODO: mensajes nuevos
-      # redirect_to verified_user_path, notice: t('verification.sms.create.flash.success')
       redirect_to verified_user_path
     else
       render :new
@@ -56,10 +55,9 @@ class Verification::AddressUsersController < ApplicationController
 
   def create
     @address_user = AddressUser.new(user_address_params)
+
     @address_user.user = current_user
     if @address_user.save
-      # TODO: mensajes nuevos
-      # redirect_to verified_user_path, notice: t('verification.sms.create.flash.success')
       redirect_to verified_user_path
     else
       render :new
@@ -89,6 +87,11 @@ class Verification::AddressUsersController < ApplicationController
     junta_vecinal = Colonium.find_by(
       "ST_DWithin(the_geom, 'POINT(#{longitude} #{latitude})',0.0000621371)"
     )
+
+    if junta_vecinal&.id == 119
+      junta_vecinal = Colonium.find_by(id: 107)
+    end
+
     if junta_vecinal.nil?
       redirect_to request.referrer, alert: "No Encontramos tu dirección en el mapa, intenta de nuevo"
     else

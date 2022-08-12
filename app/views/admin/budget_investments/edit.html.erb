@@ -1,3 +1,15 @@
+<!-- EDITAR ADMIN -->
+
+<style>
+  .js-image-attachment {
+    display: none;
+  }
+
+  .file-name {
+    display: none;
+  }
+</style>
+
 <%= link_to admin_budget_budget_investment_path(@budget, @investment, Budget::Investment.filter_params(params)), class: 'back' do %>
   <span class="icon-angle-left"></span> <%= t("shared.back") %>
 <% end %>
@@ -10,6 +22,19 @@
   <% end %>
 
   <div class="row expanded">
+
+    <% if @budget.valuating? %>
+
+      <div class="small-12 column">
+        <% if feature?(:allow_images) %>
+          <div class="images small-12 column">
+            <%= render 'images/nested_image', imageable: @investment, f: f %>
+          </div>
+        <% end %>
+      </div>
+
+    <% end %>
+
     <div class="small-12 column">
       <%= f.text_field :title, maxlength: Budget::Investment.title_max_length %>
     </div>

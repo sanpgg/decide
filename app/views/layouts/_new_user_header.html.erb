@@ -573,7 +573,7 @@
           <% if current_user.present? %>
             <%# Si el usuario esta verificado %>
             <% if current_user.level_three_verified? %>
-              <%= link_to content_tag(:div, "", id:"span")+'Decide tus propuestas favoritas aquí',
+              <%= link_to content_tag(:div, "", id:"span")+'Vota por tus propuestas favoritas aquí',
                           budget_ballot_path(current_budget),
                           { class: 'rounded-0',
                             rel: 'nofollow',

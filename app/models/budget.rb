@@ -102,6 +102,10 @@ class Budget < ActiveRecord::Base
     phase == "finished"
   end
 
+  def investments_searchable?
+    self.finished? || self.reviewing_ballots? || self.balloting? || self.publishing_prices? || self.valuating? || self.selecting? || self.reviewing? || self.accepting?
+  end
+
   def published_prices?
     Budget::Phase::PUBLISHED_PRICES_PHASES.include?(phase)
   end

@@ -70,5 +70,25 @@ class Budget
       investments.where(group: group).first.heading
     end
 
+    def remove
+      puts self.lines.inspect
+
+      self.lines.each do |line|
+        puts "|Removing ballot| investment_id: #{line.investment_id}"
+        current_ballots = Investment.find_by(id: line.investment_id)&.ballot_lines_count
+
+        unless current_ballots.nil?
+
+          puts "Before investment ballots count: #{current_ballots}"
+          Investment.find_by(id: line.investment_id)&.update_attributes!(ballot_lines_count: current_ballots - 1)
+          puts "After investment ballots count: #{Investment.find_by(id: line.investment_id)&.ballot_lines_count}"
+
+        end
+      end
+
+      # update investment
+      self.destroy
+    end
+
   end
 end

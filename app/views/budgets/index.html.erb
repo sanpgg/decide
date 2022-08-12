@@ -90,6 +90,16 @@
 
 <% provide :title do %><%= t('budgets.index.title') %><% end %>
 
+<% if current_budget.investments_searchable? %>
+
+  <% content_for :header_addon do %>
+    <%= render "shared/search_form",
+              search_path: budget_investments_path(budget_id: current_budget.id, page: 1),
+              i18n_namespace: "budgets.investments.index.search_form" %>
+  <% end %>
+
+<% end %>
+
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: budgets_url %>
 <% end %>
@@ -145,7 +155,7 @@
         <% end %>
 
         <% if current_budget.balloting? %>
-          <%= link_to 'Decide tus propuestas favoritas aquí',
+          <%= link_to 'Vota por tus propuestas favoritas aquí',
             budget_ballot_path(current_budget),
             class: "button margin-top expanded mt-4 mb-4" %>
         <% end %>
@@ -164,7 +174,7 @@
           <ul>
             <li>Registro de propuestas del <b>1 de Abril al 1 de Mayo</b></li>
             <li>Evaluación de factibilidad del <b>2 de Mayo al 1 de Julio</b></li>
-            <li>Etapa de decisiones del <b>8 al 17 de Julio</b></li>
+            <li>Etapa de votación del <b>8 al 17 de Julio</b></li>
           </ul>
           <h2><span style="font-size: 2rem;background: #00CBD4;color: white;font-size: 2rem;padding-left: 5px;padding-right: 5px;">2.</span> Conoce dónde participar:</h2>
           <p>

@@ -41,8 +41,14 @@ class Budget
     end
 
     def set_winner
-      @money_spent += @current_investment.price
-      @current_investment.update(winner: true)
+
+      #total = @current_investment.ballot_offline_count + @current_investment.ballot_lines_count
+      total = @current_investment.ballot_offline_count + Budget::Ballot::Line.counter(current_investment.id)
+
+      if total >= 10
+        @money_spent += @current_investment.price
+        @current_investment.update(winner: true)
+      end
     end
 
     def winners

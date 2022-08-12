@@ -3,7 +3,7 @@
      id="<%= results_type %>-container">
 
   <h4><%= title %></h4>
- 
+
   <table id="budget-investments-<%= results_type %>" class="table-for-mobile id-<%=@budget.id%>">
     <thead>
       <tr>
@@ -11,7 +11,7 @@
           <%= t("budgets.results.spending_proposal") %>
         </th>
          <th scope="col" class="text-center">
-          Decisiones en línea
+          Votos en línea
         </th>
 
 	  <th scope="col" class="text-center">Decide Fest</th>
@@ -50,7 +50,7 @@
                 </span>
               <% end %>
               <%= link_to investment.title, budget_investment_path(@budget, investment) %>
-            
+
             </td>
 	   <% if @budget.id < 10 %>
       <td class="text-center">

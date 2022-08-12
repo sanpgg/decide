@@ -61,10 +61,13 @@
       <%= render('shared/order_links', i18n_namespace: "budgets.investments.index") unless @current_filter == "unfeasible" %>
 
       <% if investments_default_view? %>
-	
+
+        <h3 class="margin"><%= page_entries_info @investments %></h3>
+
         <% @investments.each do |investment| %>
          
-	<% if @current_filter ==  "unfeasible" %>
+	        <% if @current_filter == "unfeasible" %>
+
             <% if investment.feasibility == "unfeasible" && investment.valuation_finished == true %>
 
               <%= render partial: '/budgets/investments/investment',
@@ -76,32 +79,36 @@
                          } %>
             <% end %>
           <% else %>
-            <% if investment.feasibility != "unfeasible" %>
-              <%= render partial:  '/budgets/investments/investment',
-                         locals: {
-                           investment: investment,
-                           investment_ids: @investment_ids,
-                           investment_votes: @investment_votes,
-                           ballot: @ballot
-                         } %>
-            <% end %>
+
+            <%= render partial: '/budgets/investments/investment',
+              locals: {
+                investment: investment,
+                investment_ids: @investment_ids,
+                investment_votes: @investment_votes,
+                ballot: @ballot
+              } %>
+
           <% end %>
+
         <% end %>
 
       <% else %>
         <% @investments.each do |investment| %>
+
           <%= render partial: '/budgets/investments/investment_minimal',
                      locals: { investment: investment } %>
 
         <% end %>
       <% end %>
-      <% if @investments.size > 9 %>
-	<br>
-      <p class="<%=@investments.size%>" style="font-size:1.3rem">
-        <em><strong class="<%=%>">Da click en <span style="color:white;background:green;">siguiente</span> para ver más propuestas.</strong></em>
-      </p>
+
+      <h3 class="margin"><%= page_entries_info @investments %></h3>
+
+      <% if @all_investments_count > @pagination_section %>
+        <p class="<%=@investments.size%>" style="font-size:1.3rem">
+          <em><strong>Da click en <span style="color:white;background:green;">siguiente</span> para ver más propuestas.</strong></em>
+        </p>
       <% end %>
-	<%= paginate @investments %>	      
+	    <%= paginate @investments %>	      
     </div>
 
     <div class="small-12 medium-3 column">
